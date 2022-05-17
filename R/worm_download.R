@@ -11,7 +11,3 @@ worm_download <- function(dist="mSBD"){
     load(tf)
     Ds
 }
-
-# 使い方
-Ds <- worm_download("mSBD")
-Ds <- worm_download("Euclid")
