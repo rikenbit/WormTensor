@@ -1,12 +1,11 @@
 Package: WormTensor
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Performs clustering using distance matrices
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Author: Kentaro Yamamoto
+Maintainer: Kentaro Yamamoto <samadakenji@gmail.com>
+Description: Clustering are performed against distance matrices and then evaluated and finally visualized.
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 URL: https://github.com/rikenbit/WormTensor
