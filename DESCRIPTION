@@ -2,9 +2,19 @@ Package: WormTensor
 Type: Package
 Title: Performs clustering using distance matrices
 Version: 0.1.0
-Author: Kentaro Yamamoto
+Authors@R: c(person("Kentaro", "Yamamoto", role = c("aut", "cre"),
+                      email = "samadakenji@gmail.com"),
+                      person("Koki", "Tsuyuzaki", role = "aut"),
+                      person("Itoshi", "Nikaido", role = "aut"))
 Maintainer: Kentaro Yamamoto <samadakenji@gmail.com>
-Description: Clustering are performed against distance matrices and then evaluated and finally visualized.
+Description: A toolkit to detect clusters from distance matrices. Distance 
+    matrices are assumed to be the distance matrices between cells for multiple 
+    animals (Caenorhabditis elegans) from input time-series matrices. 
+    Some functions for generating distance matrices from time-series matrices, 
+    performing clustering using distance matrices, evaluation of clustering 
+    results, visualization of clustering and evaluation results, 
+    and downloading distance matrices between cells for 
+    multiple animals (Caenorhabditis elegans) from figshare.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
