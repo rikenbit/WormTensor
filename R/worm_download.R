@@ -1,11 +1,16 @@
 #' Downloads distance matrices
-#' 28 animals' data including 24 normal and 4 noisy are retrieved from at figshare.
-#' @param dist # 追記する
-#'
-#' @return
-#' @export
-#'
+#' 28 animals' data including 24 normal and 4 noisy are retrieved from
+#' at figshare.
+#' @param distance # "mSBD" or "Euclid" can be specified
+#' @param qc # "PASS" or "WARN" or "FAIL" can be specified. "PASS" downloads
+#' 24 data except 4 noisy data. "WARN" downloads 27 data except 1 noisy data.
+#' "FAIL" downloads all 28 data.
+#' @return A List of containing distance matrices. The list also includes
+#' metadata for each animals.
 #' @examples
+#' DL <- worm_download("Euclid", qc="WARN")
+#' DL$Ds |> as_worm_tensor() -> object
+#' @export
 worm_download <- function(distance=c("mSBD", "Euclid"),
                           qc=c("PASS", "WARN", "FAIL")){
     # Argument Check
