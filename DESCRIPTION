@@ -1,20 +1,19 @@
 Package: WormTensor
 Type: Package
-Title: Performs clustering using distance matrices
+Title: A clustering method for time-series whole-brain activity data of C. elegans
 Version: 0.1.0
 Authors@R: c(person("Kentaro", "Yamamoto", role = c("aut", "cre"),
                       email = "samadakenji@gmail.com"),
                       person("Koki", "Tsuyuzaki", role = "aut"),
                       person("Itoshi", "Nikaido", role = "aut"))
 Maintainer: Kentaro Yamamoto <samadakenji@gmail.com>
-Description: A toolkit to detect clusters from distance matrices. Distance 
-    matrices are assumed to be the distance matrices between cells for multiple 
-    animals (Caenorhabditis elegans) from input time-series matrices. 
-    Some functions for generating distance matrices from time-series matrices, 
-    performing clustering using distance matrices, evaluation of clustering 
-    results, visualization of clustering and evaluation results, 
-    and downloading distance matrices between cells for 
-    multiple animals (Caenorhabditis elegans) from figshare.
+Description: Description: A toolkit to detect clusters from distance matrices. 
+    The distance matrices are assumed to be calculated between the cells of 
+    multiple animals (Caenorhabditis elegans) from input time-series matrices. 
+    Some functions for generating distance matrices, performing clustering, 
+    evaluating the clustering, and visualizing the results of clustering and 
+    evaluation are available. We're also providing the download function to 
+    retrieve the pre-calculated distance matrices from figshare.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -23,3 +22,15 @@ BugReports: https://github.com/rikenbit/WormTensor/issues
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
+Depends: R (>= 4.1.0)
+Imports:
+    rTensor,
+    dtwclust,
+    clusterSim,
+    clValid,
+    aricode,
+    cluster,
+    ggplot2,
+    Rtsne,
+    uwot
+RoxygenNote: 7.1.2
