@@ -1,5 +1,16 @@
-# ここにroxygen2のコメントを書く（下のlibraryは削除）
-library("dtwclust")
+#' Generates distance matrices
+#' Distance matrices are generated between the cells of multiple animals
+#' (Caenorhabditis elegans)  from time-series matrices.
+#' @param data Time-series matrices
+#' @param distance "mSBD" or "SBD" or "Euclid" can be specified. mSBD means
+#' modified Shape-based distance.
+#'
+#' @return A List of containing distance matrices
+#' @examples
+#' 実行例を書く
+#' @importFrom dtwclust SBD
+#' @importFrom dtwclust NCCc
+#' @export
 worm_distance <- function(data, distance=c("mSBD", "SBD", "Euclid")){
     # Argument Check
     .check_worm_distance(data)
