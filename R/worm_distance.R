@@ -67,7 +67,9 @@ worm_distance <- function(data, distance=c("mSBD", "SBD", "Euclid")){
     })
     out <- matrix(0, nrow=nrow(X), ncol=nrow(X))
     out[indices] <- distances
-    as.dist(out)
+    out <- as.dist(out)
+    attr(out, "Labels") <- rownames(X)
+    out
 }
 
 .mSBDMatrix <- function(X){
@@ -78,7 +80,9 @@ worm_distance <- function(data, distance=c("mSBD", "SBD", "Euclid")){
     })
     out <- matrix(0, nrow=nrow(X), ncol=nrow(X))
     out[indices] <- distances
-    as.dist(out)
+    out <- as.dist(out)
+    attr(out, "Labels") <- rownames(X)
+    out
 }
 
 .mSBD <- function(x, y, znorm = FALSE, error.check = TRUE,
