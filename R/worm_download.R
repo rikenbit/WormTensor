@@ -8,8 +8,7 @@
 #' @return A List of containing distance matrices. The list also includes
 #' metadata for each animals.
 #' @examples
-#' DL <- worm_download("Euclid", qc="WARN")
-#' DL$Ds |> as_worm_tensor() -> object
+#' Ds_Euclid <- worm_download("Euclid", qc="WARN")
 #' @export
 worm_download <- function(distance=c("mSBD", "Euclid"),
                           qc=c("PASS", "WARN", "FAIL")){
@@ -26,7 +25,7 @@ worm_download <- function(distance=c("mSBD", "Euclid"),
             tempfile1)
     }else if(distance == "Euclid"){
         download.file(
-            " https://figshare.com/ndownloader/files/35963777",
+            "https://figshare.com/ndownloader/files/35963777",
             tempfile1)
     }else{
         stop("Please specify distance as 'mSBD' or 'Euclid'!")
