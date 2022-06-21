@@ -22,11 +22,11 @@ worm_download <- function(distance=c("mSBD", "Euclid"),
     tempfile1 <- paste0(tmpdir, "/Ds.RData")
     if(distance == "mSBD"){
         download.file(
-            "https://figshare.com/ndownloader/files/34737937",
+            "https://figshare.com/ndownloader/files/35963780",
             tempfile1)
     }else if(distance == "Euclid"){
         download.file(
-            "https://figshare.com/ndownloader/files/34737931",
+            " https://figshare.com/ndownloader/files/35963777",
             tempfile1)
     }else{
         stop("Please specify distance as 'mSBD' or 'Euclid'!")
@@ -43,7 +43,7 @@ worm_download <- function(distance=c("mSBD", "Euclid"),
     }
     # Labels
     tempfile2 <- paste0(tmpdir, "/labels.csv")
-    download.file("https://figshare.com/ndownloader/files/34398068",
+    download.file("https://figshare.com/ndownloader/files/35940755",
                   tempfile2)
     labels <- read.csv(tempfile2)
     # Output
