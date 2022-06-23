@@ -9,6 +9,7 @@
 #' metadata for each animals.
 #' @examples
 #' Ds_Euclid <- worm_download("Euclid", qc="WARN")
+#' @importFrom usedist dist_subset
 #' @export
 worm_download <- function(distance=c("mSBD", "Euclid"),
                           qc=c("PASS", "WARN", "FAIL")){
@@ -46,10 +47,19 @@ worm_download <- function(distance=c("mSBD", "Euclid"),
                   tempfile2)
     labels <- read.csv(tempfile2)
     # Output
-    list(Ds=Ds[idx], labels=labels)
+    # list(Ds=Ds[idx], labels=labels)
+    Ds_f <- lapply(Ds, .filter_cellnames)
+    list(Ds=Ds_f[idx], labels=labels)
 }
 
 .qcresult <- rep("", 28)
 .qcresult[c(1:2,4:7,9:19,21:24,26:28)] <- "PASS"
 .qcresult[c(3,8,25)] <- "WARN"
 .qcresult[c(20)] <- "FAIL"
+.filter_cellnames <- function(X){
+    D <- X
+    D_cell <- attr(D, "Labels")
+    D_cell_f <- D_cell[grep("^[0-9]", D_cell, invert=TRUE)]
+    D_f <- dist_subset(D, D_cell_f)
+    D_f
+}
