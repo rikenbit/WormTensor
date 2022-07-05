@@ -7,8 +7,6 @@
 #' # Pipe Operation
 #' worm_download()$Ds |>
 #'     as_worm_tensor() -> object
-#' # k=3
-#' worm_membership(object, k=3) -> object_k3
 #' # k=6
 #' worm_membership(object, k=6) -> object_k6
 #' @import rTensor
