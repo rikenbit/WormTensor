@@ -1,7 +1,7 @@
 # Pipe Operation
 worm_download()$Ds |>
     as_worm_tensor() |>
-        worm_membership(k=5) |>
+        worm_membership(k=6) |>
             worm_clustering() -> object
 
 ######### Internal Validity Indices (w/o Labels) #########

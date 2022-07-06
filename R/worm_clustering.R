@@ -10,7 +10,8 @@
 #' # Pipe Operation
 #' worm_download("Euclid", qc="WARN")$Ds |>
 #'     as_worm_tensor() |>
-#'         worm_membership(k=6) -> object
+#'         worm_membership(k=6) |>
+#'             worm_clustering()
 #' worm_clustering(object, verbose=TRUE) -> object_mcmi
 #' worm_clustering(object, algorithm="OINDSCAL", verbose=TRUE) -> object_oindscal
 #' worm_clustering(object, algorithm="CSPA", verbose=TRUE) -> object_cspa
