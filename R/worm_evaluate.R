@@ -4,11 +4,12 @@
 #' @param labels Labels for external evaluation
 #' @return WormTensor object with an evaluation result added
 #' @examples
-#' # Internal evaluation
+#' # Pipe Operation
 #' worm_download("mSBD", qc="PASS")$Ds |>
 #'     as_worm_tensor() |>
 #'         worm_membership(k=6) |>
 #'             worm_clustering() -> object
+#' # Internal evaluation
 #' worm_evaluate(object) -> object_internal
 #'
 #' # Externall evaluation by sample labels
@@ -34,6 +35,7 @@ setMethod("worm_evaluate", "WormTensor",
     function(object, labels){
         # Argument Check
         .check_worm_evaluate(object, labels)
+
         cluster <- object@clustering
         if(object@clustering_algorithm %in% c("MCMI", "OINDSCAL")){
             data <- object@factor
@@ -47,19 +49,20 @@ setMethod("worm_evaluate", "WormTensor",
             cutree(hclust(d, method="ward.D2"), k)
         }, k=object@k)
 
+        # dist for silhouette, connectivity
+        if(object@clustering_algorithm %in% c("MCMI", "OINDSCAL")){
+            cls_dist <- dist(data)
+        }
+        if(object@clustering_algorithm == "CSPA"){
+            cls_dist <- as.dist(data)
+        }
+
         # cellwise
         # Consistency (The first list of labels is used to calculate Consistency)
         consistency=.consistency(object, labels, Cs)[[1]]$Consistency
         # No. of identified cells（Add CellCount for each animals）
         no_identified=.no_identified(object)
-        # dist for silhouette
-        if(object@clustering_algorithm %in% c("MCMI", "OINDSCAL")){
-            sil_dist <- dist(data)
-        }
-        if(object@clustering_algorithm == "CSPA"){
-            sil_dist <- as.dist(data)
-        }
-        silhouette=silhouette(cluster, sil_dist)
+        silhouette=silhouette(cluster, cls_dist)
         cellwise <- list(consistency=consistency,
                          no_identified=no_identified,
                          silhouette=silhouette)
@@ -68,7 +71,7 @@ setMethod("worm_evaluate", "WormTensor",
         # silhouette_Ave. one animal
         sil_ave=mean(cellwise$silhouette[,3])
         psf=.pseudoF(data, cluster)
-        cty=.connectivity(data, cluster)
+        cty=.connectivity(cls_dist, cluster)
         int_out <- list(PseudoF=psf, Connectivity=cty, silhouette=sil_ave)
 
         # External Validity Indices
@@ -110,11 +113,9 @@ setMethod("worm_evaluate", "WormTensor",
     index.G1(data, cluster)
 }
 
-.connectivity <- function(data, cluster){
-    # Distance matrix
-    Dist <- dist(data, method="euclidean")
+.connectivity <- function(cls_dist, cluster){
     # Connectivity
-    connectivity(Dist, cluster)
+    connectivity(cls_dist, cluster)
 }
 
 ######### External Validity Indices (w Labels) #########
