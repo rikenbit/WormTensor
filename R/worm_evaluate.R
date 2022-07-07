@@ -51,7 +51,11 @@ setMethod("worm_evaluate", "WormTensor",
         no_identified=.no_identified(object)
 
         # Internal Validity Indices（Silhouette係数を追加する）
-        silhouette=silhouette()
+        silhouette=.silhouette_cell(object)
+
+        cellwise <- list(consistency=consistency,
+                         no_identified=no_identified,
+                         silhouette=silhouette)
 
         psf=.pseudoF(data, cluster)
         cty=.connectivity(data, cluster)
@@ -70,7 +74,7 @@ setMethod("worm_evaluate", "WormTensor",
             ext_out <- list(Fmeasure=NULL, Entropy=NULL, Purity=NULL)
         }
         # Ouput
-        out <- list(internal=int_out, external=ext_out)
+        out <- list(internal=int_out, external=ext_out, cellwise=cellwise)
         object@eval <- out
         object
     }
@@ -232,3 +236,19 @@ setMethod("worm_evaluate", "WormTensor",
             as.numeric() -> cell_count
     return(cell_count)
 }
+######### no_identified #########
+.silhouette_cell <- function(object){
+    algorithm <- object@clustering_algorithm
+    sil_dist <- .distFunc[[algorithm]]
+    cls <- object@clustering
+
+    sil <- silhouette(cls, sil_dist)
+    rownames(sil) <- object@union_cellnames
+    return(sil)
+}
+# Selecting how to create a distance matrix object
+.distFunc <- list(
+    "CSPA" = as.dist(1 - object@consensus),
+    "OINDSCAL" = dist(object@factor),
+    "MCMI" = dist(object@factor)
+)
