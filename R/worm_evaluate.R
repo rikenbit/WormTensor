@@ -1,22 +1,24 @@
-#' Title
-#'
-#' @param WormTensor
-#'
-#' @return
+#' Evaluates clustering result
+#' An evaluation result is generated from a wormTensor object
+#' @param object WormTensor object with a result of worm_clustering
+#' @param labels Labels for external evaluation
+#' @return WormTensor object with an evaluation result added
 #' @examples
-#' # Pipe Operation
+#' # Internal evaluation
 #' worm_download("mSBD", qc="PASS")$Ds |>
 #'     as_worm_tensor() |>
 #'         worm_membership(k=6) |>
 #'             worm_clustering() -> object
 #' worm_evaluate(object) -> object_internal
+#'
+#' # Externall evaluation by sample labels
 #' labels <- list(
 #'     label1 = sample(3, length(object@clustering), replace=TRUE),
 #'     label2 = sample(4, length(object@clustering), replace=TRUE),
 #'     label3 = sample(5, length(object@clustering), replace=TRUE))
 #' worm_evaluate(object, labels) -> object_external
 #'
-#' # label1 is used Consistency
+#' # External evaluation by worm_download labels
 #' Ds_mSBD <- worm_download("mSBD", qc="PASS")
 #' labels <- list(
 #'     label1 = replace(Ds_mSBD$labels$Class, which(is.na(Ds_mSBD$labels$Class)), "NA"),
@@ -39,19 +41,18 @@ setMethod("worm_evaluate", "WormTensor",
         if(object@clustering_algorithm == "CSPA"){
             data <- 1 - object@consensus
         }
-        #
-        # Consistencyをここに追加する
-        # Consistencyの計算で使う個体ごとのクラスタリング結果
+
+        # Clustering results for each animals
         Cs <- lapply(object@dist_matrices, function(d, k){
             cutree(hclust(d, method="ward.D2"), k)
         }, k=object@k)
-        # labelsの1つめのリストのConsistencyを取得
+
+        # cellwise
+        # Consistency (The first list of labels is used to calculate Consistency)
         consistency=.consistency(object, labels, Cs)[[1]]$Consistency
-
-        # No. of identified cells（各個体のCellCountを追加）
+        # No. of identified cells（Add CellCount for each animals）
         no_identified=.no_identified(object)
-
-        # Internal Validity Indices（Silhouette係数を追加する）
+        # dist for silhouette
         if(object@clustering_algorithm %in% c("MCMI", "OINDSCAL")){
             sil_dist <- dist(data)
         }
@@ -59,15 +60,17 @@ setMethod("worm_evaluate", "WormTensor",
             sil_dist <- as.dist(data)
         }
         silhouette=silhouette(cluster, sil_dist)
-
-        # cellwise
         cellwise <- list(consistency=consistency,
                          no_identified=no_identified,
                          silhouette=silhouette)
 
+        # Internal Validity Indices
+        # silhouette_Ave. one animal
+        sil_ave=mean(cellwise$silhouette[,3])
         psf=.pseudoF(data, cluster)
         cty=.connectivity(data, cluster)
-        int_out <- list(PseudoF=psf, Connectivity=cty)
+        int_out <- list(PseudoF=psf, Connectivity=cty, silhouette=sil_ave)
+
         # External Validity Indices
         if(!is.null(labels)){
             ext_out <- lapply(labels, function(l){
