@@ -15,8 +15,9 @@
 #'     label2 = sample(4, length(object@clustering), replace=TRUE),
 #'     label3 = sample(5, length(object@clustering), replace=TRUE))
 #' worm_evaluate(object, labels) -> object_external
-#' Ds_mSBD <- worm_download("mSBD", qc="PASS")
+#'
 #' # label1 is used Consistency
+#' Ds_mSBD <- worm_download("mSBD", qc="PASS")
 #' labels <- list(
 #'     label1 = replace(Ds_mSBD$labels$Class, which(is.na(Ds_mSBD$labels$Class)), "NA"),
 #'     label2 = sample(4, length(object@clustering), replace=TRUE),
@@ -51,8 +52,15 @@ setMethod("worm_evaluate", "WormTensor",
         no_identified=.no_identified(object)
 
         # Internal Validity Indices（Silhouette係数を追加する）
-        silhouette=.silhouette_cell(object)
+        if(object@clustering_algorithm %in% c("MCMI", "OINDSCAL")){
+            sil_dist <- dist(data)
+        }
+        if(object@clustering_algorithm == "CSPA"){
+            sil_dist <- as.dist(data)
+        }
+        silhouette=silhouette(cluster, sil_dist)
 
+        # cellwise
         cellwise <- list(consistency=consistency,
                          no_identified=no_identified,
                          silhouette=silhouette)
@@ -236,19 +244,3 @@ setMethod("worm_evaluate", "WormTensor",
             as.numeric() -> cell_count
     return(cell_count)
 }
-######### no_identified #########
-.silhouette_cell <- function(object){
-    algorithm <- object@clustering_algorithm
-    sil_dist <- .distFunc[[algorithm]]
-    cls <- object@clustering
-
-    sil <- silhouette(cls, sil_dist)
-    rownames(sil) <- object@union_cellnames
-    return(sil)
-}
-# Selecting how to create a distance matrix object
-.distFunc <- list(
-    "CSPA" = as.dist(1 - object@consensus),
-    "OINDSCAL" = dist(object@factor),
-    "MCMI" = dist(object@factor)
-)
