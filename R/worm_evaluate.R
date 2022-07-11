@@ -59,7 +59,7 @@ setMethod("worm_evaluate", "WormTensor",
 
         # cellwise
         # Consistency (The first list of labels is used to calculate Consistency)
-        consistency=.consistency(object, labels, Cs)[[1]]$Consistency
+        consistency=.consistency(object, labels, Cs)
         # No. of identified cells（Add CellCount for each animals）
         no_identified=.no_identified(object)
         silhouette=silhouette(cluster, cls_dist)
@@ -209,10 +209,7 @@ setMethod("worm_evaluate", "WormTensor",
             return(df_count_union_)
         })
         consistency <- Reduce("+",df_count_union_list)
-        df_count_sum <- data.frame(CellType = object@union_cellnames,
-                                   Consistency = consistency,
-                                   stringsAsFactors = FALSE)
-        return(df_count_sum)
+        return(consistency)
     })
     return(consistency_l)
 }

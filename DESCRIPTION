@@ -25,6 +25,7 @@ Config/testthat/edition: 3
 Depends: R (>= 4.1.0)
 Imports:
     rTensor,
+    usedist
     dtwclust,
     clusterSim,
     clValid,
