@@ -28,32 +28,56 @@
 #' @importFrom
 #' @import ggplot2
 #' @import Rtsne
-#' @import Rtsne
+#' @import uwot
+#' @import factoextra
 #' @export
 setMethod("worm_visualize", "WormTensor",
     function(object, algorithm, out.dir){
     # Argument Check
     algorithm <- match.arg(algorithm)
     .check_worm_visualize(object, out.dir)
-    # Dimensional Reduction
+    # data forDimensional Reduction
     if(object@clustering_algorithm %in% c("MCMI", "OINDSCAL")){
         data <- object@factor
     }
     if(object@clustering_algorithm == "CSPA"){
-        data <- as.dist(1 - object@consensus)
+        # data <- as.dist(1 - object@consensus)
+        data <- 1 - object@consensus
     }
+    # dist for Dimensional Reduction
+    if(object@clustering_algorithm %in% c("MCMI", "OINDSCAL")){
+        cls_dist <- dist(data)
+    }
+    if(object@clustering_algorithm == "CSPA"){
+        cls_dist <- as.dist(data)
+    }
+    # Random number fixing
+    set.seed(1234)
     if(algorithm == "tSNE"){
-        if("dist" %in% is(data)){
-            twoD <- Rtsne(data, is_distance=TRUE, check_duplicates=FALSE)$Y
-        }else{
-            twoD <- Rtsne(data, check_duplicates=FALSE)$Y
-        }
+        # if("dist" %in% is(data)){
+        #     twoD <- Rtsne(data, is_distance=TRUE, check_duplicates=FALSE)$Y
+        # }else{
+        #     twoD <- Rtsne(data, check_duplicates=FALSE)$Y
+        # }
+        twoD <- Rtsne(cls_dist,
+                      is_distance=TRUE,
+                      # dims = 2,
+                      # perplexity = 15,
+                      # verbose = TRUE,
+                      # max_iter = 1000
+                      check_duplicates=FALSE)$Y
     }
     if(algorithm == "UMAP"){
-        twoD <- umap(data)
+        # twoD <- umap(data)
+        twoD <- uwot::umap(X = NULL,
+                           metric = "precomputed",
+                           nn_method = uwot:::dist_nn(cls_dist, k = attr(cls_dist, "Size")),
+                           # n_neighbors = 15,
+                           # n_components = 2
+                           )
     }
     # ここに画像をout.dir以下に出力するコードを書いていく
-    # make /figures
+    # Make figures dir
     if(!dir.exists(paste0(out.dir, "/figures"))){
         dir.create(paste0(out.dir, "/figures"))
     }
@@ -75,17 +99,7 @@ setMethod("worm_visualize", "WormTensor",
            limitsize = FALSE)
 
     ##### 2. 次元圧縮図に色を反映させたもの（例: 論文 Figure 3,4）####
-    # 次元削減のインプットデータ(cls_dist)用意
-    if(object@clustering_algorithm %in% c("MCMI", "OINDSCAL")){
-        object@factor |>
-            dist() -> cls_dist
-    }
-    if(object@clustering_algorithm == "CSPA"){
-        1 - object@consensus |>
-            as.dist() -> cls_dist
-    }
-    # 次元削減
-    set.seed(1234)
+
 
     # 3. 重み/ARIと同定細胞数の関係（例: 論文 Figure 6a）
 
