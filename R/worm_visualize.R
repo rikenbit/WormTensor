@@ -41,7 +41,6 @@ setMethod("worm_visualize", "WormTensor",
         data <- object@factor
     }
     if(object@clustering_algorithm == "CSPA"){
-        # data <- as.dist(1 - object@consensus)
         data <- 1 - object@consensus
     }
     # dist for Dimensional Reduction
@@ -54,28 +53,24 @@ setMethod("worm_visualize", "WormTensor",
     # Random number fixing
     set.seed(1234)
     if(algorithm == "tSNE"){
-        # if("dist" %in% is(data)){
-        #     twoD <- Rtsne(data, is_distance=TRUE, check_duplicates=FALSE)$Y
-        # }else{
-        #     twoD <- Rtsne(data, check_duplicates=FALSE)$Y
-        # }
         twoD <- Rtsne(cls_dist,
                       is_distance=TRUE,
-                      # dims = 2,
                       # perplexity = 15,
-                      # verbose = TRUE,
-                      # max_iter = 1000
-                      check_duplicates=FALSE)$Y
+                      # max_iter = 1000,
+                      check_duplicates=FALSE
+                      )$Y
     }
     if(algorithm == "UMAP"){
-        # twoD <- umap(data)
+        # cf. https://github.com/jlmelville/uwot/issues/22
         twoD <- uwot::umap(X = NULL,
                            metric = "precomputed",
-                           nn_method = uwot:::dist_nn(cls_dist, k = attr(cls_dist, "Size")),
                            # n_neighbors = 15,
-                           # n_components = 2
+                           # n_components = 2,
+                           nn_method = uwot:::dist_nn(cls_dist,
+                                                      k = attr(cls_dist, "Size")),
                            )
     }
+
     # ここに画像をout.dir以下に出力するコードを書いていく
     # Make figures dir
     if(!dir.exists(paste0(out.dir, "/figures"))){
