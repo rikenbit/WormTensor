@@ -25,11 +25,11 @@
 #     worm_clustering() |>
 #     worm_evaluate(labels) |>
 #     worm_visualize("tSNE",out.dir) -> object
-#' @importFrom
 #' @import ggplot2
 #' @import Rtsne
 #' @import uwot
 #' @import factoextra
+#' @importFrom ggrepel geom_label_repel
 #' @export
 setMethod("worm_visualize", "WormTensor",
     function(object, algorithm, out.dir){
@@ -59,6 +59,8 @@ setMethod("worm_visualize", "WormTensor",
                       # max_iter = 1000,
                       check_duplicates=FALSE
                       )$Y
+        cord_x <- c("t-SNE-1")
+        cord_y <- c("t-SNE-2")
     }
     if(algorithm == "UMAP"){
         # cf. https://github.com/jlmelville/uwot/issues/22
@@ -69,6 +71,8 @@ setMethod("worm_visualize", "WormTensor",
                            nn_method = uwot:::dist_nn(cls_dist,
                                                       k = attr(cls_dist, "Size")),
                            )
+        cord_x <- c("UMAP-1")
+        cord_y <- c("UMAP-2")
     }
 
     # ここに画像をout.dir以下に出力するコードを書いていく
@@ -86,7 +90,7 @@ setMethod("worm_visualize", "WormTensor",
              fill = "Cluster") +
         theme(text = element_text(size = 90))
     # save (silhouette plot of each cell)
-    ggsave(filename = paste0(out.dir, "/figures/silhouette.png"),
+    ggsave(filename = paste0(out.dir, "/figures/Silhouette.png"),
            plot = gg_sil,
            dpi = 100,
            width = 30.0,
@@ -94,9 +98,109 @@ setMethod("worm_visualize", "WormTensor",
            limitsize = FALSE)
 
     ##### 2. 次元圧縮図に色を反映させたもの（例: 論文 Figure 3,4）####
+    ##### Cluster#####
+    df_cls <- data.frame(cord_1 = twoD[,1],
+                         cord_2 = twoD[,2],
+                         cell_type = object@union_cellnames,
+                         Cluster = object@clustering,
+                         stringsAsFactors = FALSE
+                         )
+    gg_cls <- ggplot(df_cls,
+                     aes(x = cord_1,
+                         y = cord_2,
+                         label = cell_type,
+                         color = factor(Cluster)
+                         )
+                     ) +
+        labs(color = "Cluster") +
+        geom_point(size = 6.0,
+                   alpha = 0.6) +
+        geom_label_repel(max.overlaps = Inf,
+                         min.segment.length = 0,
+                         size = 9.0,
+                         force = 6.0) +
+        theme(text = element_text(size = 60)) +
+        labs(x = cord_x,
+             y = cord_y)
+    ggsave(filename = paste0(out.dir, "/figures/Cluster.png"),
+           plot = gg_cls,
+           dpi = 100,
+           width = 25.0,
+           height = 20.0,
+           limitsize = FALSE)
 
-
-    # 3. 重み/ARIと同定細胞数の関係（例: 論文 Figure 6a）
+    ##### No. of cells#####
+    df_cc <- data.frame(cord_1 = twoD[,1],
+                        cord_2 = twoD[,2],
+                        cell_type = object@union_cellnames,
+                        cell_count = object@eval$cellwise$no_identified,
+                        stringsAsFactors = FALSE
+                        )
+    gg_cc <- ggplot(df_cc,
+                    aes(x = cord_1,
+                        y = cord_2,
+                        label = cell_type,
+                        color = cell_count
+                        )
+        ) +
+        scale_color_viridis_c(option = "D") +
+        labs(color = "No. of cells") +
+        geom_point(size = 6.0,
+                   alpha = 0.6) +
+        geom_label_repel(max.overlaps = Inf,
+                         min.segment.length = 0,
+                         size = 9.0,
+                         force = 6.0) +
+        theme(text = element_text(size = 60)) +
+        labs(x = cord_x,
+             y = cord_y) +
+        theme(legend.key.height = unit(1.5, "cm")) +
+        theme(legend.key.width = unit(1.5, "cm"))
+    ggsave(filename = paste0(out.dir, "/figures/no_identified.png"),
+           plot = gg_cc,
+           dpi = 100,
+           width = 25.0,
+           height = 20.0,
+           limitsize = FALSE)
+    ##### consistency#####
+    con_list <- object@eval$cellwise$consistency
+    for (x in seq_along(con_list)) {
+        con_name <- names(con_list[x])
+        con_value <- con_list[[x]]
+        df_con <- data.frame(cord_1 = twoD[,1],
+                        cord_2 = twoD[,2],
+                        cell_type = object@union_cellnames,
+                        consistency = con_value,
+                        stringsAsFactors = FALSE
+                        )
+        gg_con <- ggplot(df_con,
+                         aes(x = cord_1,
+                             y = cord_2,
+                             label = cell_type,
+                             color = consistency
+                             )
+            ) +
+            scale_color_viridis_c(option = "D") +
+            labs(color = "Consistency") +
+            geom_point(size = 6.0,
+                       alpha = 0.6) +
+            geom_label_repel(max.overlaps = Inf,
+                             min.segment.length = 0,
+                             size = 9.0,
+                             force = 6.0) +
+            theme(text = element_text(size = 60)) +
+            labs(x = cord_x,
+                 y = cord_y) +
+            theme(legend.key.height = unit(1.5, "cm")) +
+            theme(legend.key.width = unit(1.5, "cm"))
+        ggsave(filename = paste0(out.dir, "/figures/consistency_", con_name, ".png"),
+               plot = gg_con,
+               dpi = 100,
+               width = 25.0,
+               height = 20.0,
+               limitsize = FALSE)
+    }
+    ##### 3. 重み/ARIと同定細胞数の関係（例: 論文 Figure 6a）#####
 
     # Output
     object
