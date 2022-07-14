@@ -162,43 +162,86 @@ setMethod("worm_visualize", "WormTensor",
            width = 25.0,
            height = 20.0,
            limitsize = FALSE)
-    ##### consistency#####
-    con_list <- object@eval$cellwise$consistency
-    for (x in seq_along(con_list)) {
-        con_name <- names(con_list[x])
-        con_value <- con_list[[x]]
-        df_con <- data.frame(cord_1 = twoD[,1],
-                        cord_2 = twoD[,2],
-                        cell_type = object@union_cellnames,
-                        consistency = con_value,
-                        stringsAsFactors = FALSE
-                        )
-        gg_con <- ggplot(df_con,
-                         aes(x = cord_1,
-                             y = cord_2,
-                             label = cell_type,
-                             color = consistency
-                             )
-            ) +
-            scale_color_viridis_c(option = "D") +
-            labs(color = "Consistency") +
-            geom_point(size = 6.0,
-                       alpha = 0.6) +
-            geom_label_repel(max.overlaps = Inf,
-                             min.segment.length = 0,
-                             size = 9.0,
-                             force = 6.0) +
-            theme(text = element_text(size = 60)) +
-            labs(x = cord_x,
-                 y = cord_y) +
-            theme(legend.key.height = unit(1.5, "cm")) +
-            theme(legend.key.width = unit(1.5, "cm"))
-        ggsave(filename = paste0(out.dir, "/figures/consistency_", con_name, ".png"),
-               plot = gg_con,
-               dpi = 100,
-               width = 25.0,
-               height = 20.0,
-               limitsize = FALSE)
+    ##### consistency  (plot each label)#####
+    if(!is.null(object@eval$cellwise$consistency)){
+        con_list <- object@eval$cellwise$consistency
+        for (x in seq_along(con_list)) {
+            con_name <- names(con_list[x])
+            con_value <- con_list[[x]]
+            df_con <- data.frame(cord_1 = twoD[,1],
+                            cord_2 = twoD[,2],
+                            cell_type = object@union_cellnames,
+                            consistency = con_value,
+                            stringsAsFactors = FALSE
+                            )
+            gg_con <- ggplot(df_con,
+                             aes(x = cord_1,
+                                 y = cord_2,
+                                 label = cell_type,
+                                 color = consistency
+                                 )
+                ) +
+                scale_color_viridis_c(option = "D") +
+                labs(color = "Consistency") +
+                geom_point(size = 6.0,
+                           alpha = 0.6) +
+                geom_label_repel(max.overlaps = Inf,
+                                 min.segment.length = 0,
+                                 size = 9.0,
+                                 force = 6.0) +
+                theme(text = element_text(size = 60)) +
+                labs(x = cord_x,
+                     y = cord_y) +
+                theme(legend.key.height = unit(1.5, "cm")) +
+                theme(legend.key.width = unit(1.5, "cm"))
+            ggsave(filename = paste0(out.dir, "/figures/consistency_", con_name, ".png"),
+                   plot = gg_con,
+                   dpi = 100,
+                   width = 25.0,
+                   height = 20.0,
+                   limitsize = FALSE)
+        }
+    }
+    ##### Class (plot each label)#####
+    if(!is.null(object@eval$external_label)){
+        # plot
+        label_list <- object@eval$external_label
+        for (x in seq_along(label_list)) {
+            label_name <- names(label_list[x])
+            label_value <- label_list[[x]]
+            # convert NA(char) to NA
+            label_value[which(label_value=="NA")] <- NA
+            df_label <- data.frame(cord_1 = twoD[,1],
+                                   cord_2 = twoD[,2],
+                                   cell_type = object@union_cellnames,
+                                   Class = label_value,
+                                   stringsAsFactors = FALSE
+                                   )
+            gg_label <- ggplot(df_label,
+                               aes(x = cord_1,
+                                   y = cord_2,
+                                   label = cell_type,
+                                   color = factor(Class)
+                                   )
+                             ) +
+                labs(color = "Class") +
+                geom_point(size = 6.0,
+                           alpha = 0.6) +
+                geom_label_repel(max.overlaps = Inf,
+                                 min.segment.length = 0,
+                                 size = 9.0,
+                                 force = 6.0) +
+                theme(text = element_text(size = 60)) +
+                labs(x = cord_x,
+                     y = cord_y)
+            ggsave(filename = paste0(out.dir, "/figures/Class_", label_name, ".png"),
+                   plot = gg_label,
+                   dpi = 100,
+                   width = 25.0,
+                   height = 20.0,
+                   limitsize = FALSE
+                   )
+        }
     }
     ##### 3. 重み/ARIと同定細胞数の関係（例: 論文 Figure 6a）#####
 

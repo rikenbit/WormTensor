@@ -56,7 +56,11 @@ setMethod("worm_evaluate", "WormTensor",
         }
 
         # cellwise
-        consistency=.consistency(object, labels, Cs)
+        if(!is.null(labels)){
+            consistency=.consistency(object, labels, Cs)
+        }else{
+            consistency=NULL
+        }
         no_identified=.no_identified(object)
         silhouette=silhouette(cluster, cls_dist)
         cellwise <- list(consistency=consistency,
