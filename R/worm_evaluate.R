@@ -43,12 +43,10 @@ setMethod("worm_evaluate", "WormTensor",
         if(object@clustering_algorithm == "CSPA"){
             data <- 1 - object@consensus
         }
-
         # Clustering results for each animals
         Cs <- lapply(object@dist_matrices, function(d, k){
             cutree(hclust(d, method="ward.D2"), k)
         }, k=object@k)
-
         # dist for silhouette, connectivity
         if(object@clustering_algorithm %in% c("MCMI", "OINDSCAL")){
             cls_dist <- dist(data)
@@ -58,9 +56,7 @@ setMethod("worm_evaluate", "WormTensor",
         }
 
         # cellwise
-        # Consistency (The first list of labels is used to calculate Consistency)
         consistency=.consistency(object, labels, Cs)
-        # No. of identified cells（Add CellCount for each animals）
         no_identified=.no_identified(object)
         silhouette=silhouette(cluster, cls_dist)
         cellwise <- list(consistency=consistency,
@@ -74,7 +70,7 @@ setMethod("worm_evaluate", "WormTensor",
         cty=.connectivity(cls_dist, cluster)
         int_out <- list(PseudoF=psf, Connectivity=cty, silhouette=sil_ave)
 
-        # External Validity Indices
+        # External Validity Indices &Labels
         if(!is.null(labels)){
             ext_out <- lapply(labels, function(l){
                 list(
@@ -84,11 +80,18 @@ setMethod("worm_evaluate", "WormTensor",
                     ARI=ARI(cluster, l))
             })
             names(ext_out) <- names(labels)
+            # add labels
+            ext_labels <- labels
         }else{
             ext_out <- list(Fmeasure=NULL, Entropy=NULL, Purity=NULL)
+            # add labels
+            ext_labels=NULL
         }
         # Ouput
-        out <- list(internal=int_out, external=ext_out, cellwise=cellwise)
+        out <- list(internal=int_out,
+                    external=ext_out,
+                    cellwise=cellwise,
+                    external_label=ext_labels) # add labels
         object@eval <- out
         object
     }
