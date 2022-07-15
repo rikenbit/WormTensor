@@ -91,11 +91,64 @@ setMethod("worm_evaluate", "WormTensor",
             # add labels
             ext_labels=NULL
         }
+
+        # Each_animal Clustering Similarities
+        if(object@clustering_algorithm=="MCMI"){
+            # Preparation dataframe for ARI calculation
+            lapply(Cs, function(x) {
+                data.frame(CellType = attr(x, "names"),
+                           Clusters = as.numeric(x),
+                           stringsAsFactors = FALSE,
+                           row.names = NULL
+                           )
+                }
+            ) -> df_cls_list
+            data.frame(CellType = object@union_cellnames,
+                       Classes = object@clustering,
+                       stringsAsFactors = FALSE,
+                       row.names = NULL
+                       ) -> df_merged_cls
+            lapply(df_cls_list, function(x) {
+                merge(x,
+                      df_merged_cls,
+                      by.x = "CellType",
+                      by.y = "CellType",
+                      all.y = TRUE
+                      ) -> df_cls_label_NA
+                na.omit(df_cls_label_NA)
+                }
+            ) -> df_cls_label
+            # Calculation of ARI
+            lapply(df_cls_label, function(x) {
+                clusters <- x$Clusters
+                classes <- x$Classes
+                ARI(clusters, classes)
+                }
+            ) |>
+                unlist() |>
+                    as.numeric() -> ARI_value
+            # annotated count
+            lapply(object@dist_matrices,
+                   function(x){attr(x,"Size")}) |>
+                unlist() |>
+                    as.numeric() -> annotated_count
+            # each_animal object
+            df_eval_each_animal <- data.frame(animals = names(object@dist_matrices),
+                                              weight = object@weight,
+                                              ARI = ARI_value,
+                                              ann_count = annotated_count,
+                                              stringsAsFactors = FALSE)
+        }else{
+            # case CSPA or OINDSCAL
+            df_eval_each_animal=NULL
+        }
         # Ouput
         out <- list(internal=int_out,
                     external=ext_out,
                     cellwise=cellwise,
-                    external_label=ext_labels) # add labels
+                    external_label=ext_labels, # add labels
+                    each_animal=df_eval_each_animal  # add df
+                    )
         object@eval <- out
         object
     }
