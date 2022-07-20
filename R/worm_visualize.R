@@ -43,8 +43,9 @@ setMethod("worm_visualize", "WormTensor",
     function(object, algorithm, out.dir){
     # Argument Check
     algorithm <- match.arg(algorithm)
+    object@dimension_reduction_algorithm <- algorithm
     .check_worm_visualize(object, out.dir)
-    # data forDimensional Reduction
+    # data for Dimensional Reduction
     if(object@clustering_algorithm %in% c("MCMI", "OINDSCAL")){
         data <- object@factor
     }
@@ -60,6 +61,7 @@ setMethod("worm_visualize", "WormTensor",
     }
     # Random number fixing
     set.seed(1234)
+    # Dimensional Reduction
     if(algorithm == "tSNE"){
         twoD <- Rtsne(cls_dist,
                       is_distance=TRUE,
