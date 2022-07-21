@@ -1,8 +1,21 @@
-#' Title
-#'
-#' @param WormTensor
-#'
-#' @return
+#' Plots evaluation result
+#' A visualization result is generated from a WormTensor object
+#' @param object WormTensor object with a result of worm_evaluate
+#' @param algorithm Dimensional reduction methods
+#' @param out.dir Output directory (default: tempdir())
+#' @param seed Arguments passed to set.seed (default: 1234)
+#' @param tsne.dims Output dimensionality (default: 2)
+#' @param tsne.perplexity Perplexity paramete (default: 15)
+#' @param tsne.verbose logical; Whether progress updates should be printed
+#' (default: TRUE)
+#' @param tsne.max_iter Number of iterations (default: 1000)
+#' @param umap.n_neighbors The size of local neighborhood (default: 15)
+#' @param umap.n_components The dimension of the space to embed into (default: 2)
+#' @param silhouette.summary logical; If true a summary of
+#' cluster silhouettes are printed.
+#' @return Silhouette plots. ARI with a merge result and each animal(with MCMI).
+#'  Dimensional reduction Plots colored by cluster, no. of identified cells,
+#'  consistency(with labels), Class_label(with labels).
 #' @examples
 #' # Temporary directory to save figures
 #' out.dir <- tempdir()
@@ -34,10 +47,11 @@
 #'    worm_evaluate(labels) |>
 #'    worm_visualize("tSNE",out.dir) -> object
 #' @import ggplot2
-#' @import Rtsne
+#' @importFrom Rtsne Rtsne
 #' @import uwot
-#' @import factoextra
+#' @importFrom factoextra fviz_silhouette
 #' @importFrom ggrepel geom_label_repel
+#' @import cowplot
 #' @export
 setMethod("worm_visualize", "WormTensor",
     function(object,
@@ -50,7 +64,7 @@ setMethod("worm_visualize", "WormTensor",
              tsne.max_iter,
              umap.n_neighbors,
              umap.n_components,
-             silhouette.sammary){
+             silhouette.summary){
     # Argument Check
     algorithm <- match.arg(algorithm)
     object@dimension_reduction_algorithm <- algorithm
@@ -63,7 +77,7 @@ setMethod("worm_visualize", "WormTensor",
                           tsne.max_iter,
                           umap.n_neighbors,
                           umap.n_components,
-                          silhouette.sammary)
+                          silhouette.summary)
     # data for Dimensional Reduction
     if(object@clustering_algorithm %in% c("MCMI", "OINDSCAL")){
         data <- object@factor
@@ -113,7 +127,7 @@ setMethod("worm_visualize", "WormTensor",
     }
     #### 1. 細胞ごとのシルエット図（例: 論文 Figure 2）####
     sil <- object@eval$cellwise$silhouette
-    gg_sil <- fviz_silhouette(sil, print.summary = silhouette.sammary) +
+    gg_sil <- fviz_silhouette(sil, print.summary = silhouette.summary) +
         labs(y = "Silhouette width",
              x = "",
              # title = "",
@@ -356,7 +370,7 @@ setMethod("worm_visualize", "WormTensor",
                                   tsne.max_iter,
                                   umap.n_neighbors,
                                   umap.n_components,
-                                  silhouette.sammary){
+                                  silhouette.summary){
     # Backword Check
     if(length(object@eval) == 0){
         stop("Perform worm_eval first.")
@@ -392,5 +406,5 @@ setMethod("worm_visualize", "WormTensor",
     if(umap.n_components <= 0 || !.is_integer(umap.n_components)){
         stop("Specify umap.n_components as a positive integer.")
     }
-    stopifnot(is.logical(silhouette.sammary))
+    stopifnot(is.logical(silhouette.summary))
 }

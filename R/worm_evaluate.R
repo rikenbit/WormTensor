@@ -1,5 +1,5 @@
 #' Evaluates clustering result
-#' An evaluation result is generated from a wormTensor object
+#' An evaluation result is generated from a WormTensor object
 #' @param object WormTensor object with a result of worm_clustering
 #' @param labels Labels for external evaluation
 #' @return WormTensor object with an evaluation result added
