@@ -40,11 +40,30 @@
 #' @importFrom ggrepel geom_label_repel
 #' @export
 setMethod("worm_visualize", "WormTensor",
-    function(object, algorithm, out.dir){
+    function(object,
+             algorithm,
+             out.dir,
+             seed,
+             tsne.dims,
+             tsne.perplexity,
+             tsne.verbose,
+             tsne.max_iter,
+             umap.n_neighbors,
+             umap.n_components,
+             silhouette.sammary){
     # Argument Check
     algorithm <- match.arg(algorithm)
     object@dimension_reduction_algorithm <- algorithm
-    .check_worm_visualize(object, out.dir)
+    .check_worm_visualize(object,
+                          out.dir,
+                          seed,
+                          tsne.dims,
+                          tsne.perplexity,
+                          tsne.verbose,
+                          tsne.max_iter,
+                          umap.n_neighbors,
+                          umap.n_components,
+                          silhouette.sammary)
     # data for Dimensional Reduction
     if(object@clustering_algorithm %in% c("MCMI", "OINDSCAL")){
         data <- object@factor
@@ -60,13 +79,15 @@ setMethod("worm_visualize", "WormTensor",
         cls_dist <- as.dist(data)
     }
     # Random number fixing
-    set.seed(1234)
+    set.seed(seed)
     # Dimensional Reduction
     if(algorithm == "tSNE"){
         twoD <- Rtsne(cls_dist,
                       is_distance=TRUE,
-                      # perplexity = 15,
-                      # max_iter = 1000,
+                      dims = tsne.dims,
+                      perplexity = tsne.perplexity,
+                      verbose = tsne.verbose,
+                      max_iter = tsne.max_iter,
                       check_duplicates=FALSE
                       )$Y
         cord_x <- c("t-SNE-1")
@@ -76,8 +97,8 @@ setMethod("worm_visualize", "WormTensor",
         # cf. https://github.com/jlmelville/uwot/issues/22
         twoD <- uwot::umap(X = NULL,
                            metric = "precomputed",
-                           # n_neighbors = 15,
-                           # n_components = 2,
+                           n_neighbors = umap.n_neighbors,
+                           n_components = umap.n_components,
                            nn_method = uwot:::dist_nn(cls_dist,
                                                       k = attr(cls_dist, "Size")
                                                       )
@@ -92,7 +113,7 @@ setMethod("worm_visualize", "WormTensor",
     }
     #### 1. 細胞ごとのシルエット図（例: 論文 Figure 2）####
     sil <- object@eval$cellwise$silhouette
-    gg_sil <- fviz_silhouette(sil) +
+    gg_sil <- fviz_silhouette(sil, print.summary = silhouette.sammary) +
         labs(y = "Silhouette width",
              x = "",
              # title = "",
@@ -326,7 +347,16 @@ setMethod("worm_visualize", "WormTensor",
     }
 )
 
-.check_worm_visualize <- function(object, out.dir){
+.check_worm_visualize <- function(object,
+                                  out.dir,
+                                  seed,
+                                  tsne.dims,
+                                  tsne.perplexity,
+                                  tsne.verbose,
+                                  tsne.max_iter,
+                                  umap.n_neighbors,
+                                  umap.n_components,
+                                  silhouette.sammary){
     # Backword Check
     if(length(object@eval) == 0){
         stop("Perform worm_eval first.")
@@ -337,4 +367,30 @@ setMethod("worm_visualize", "WormTensor",
             stop("Specify a valid out.dir.")
         }
     }
+    stopifnot(is.numeric(seed))
+    if(seed <= 0 || !.is_integer(seed)){
+        stop("Specify seed as a positive integer.")
+    }
+    stopifnot(is.numeric(tsne.dims))
+    if(tsne.dims <= 0 || !.is_integer(tsne.dims)){
+        stop("Specify tsne.dims as a positive integer.")
+    }
+    stopifnot(is.numeric(tsne.perplexity))
+    if(tsne.perplexity <= 0 || !.is_integer(tsne.perplexity)){
+        stop("Specify tsne.perplexity as a positive integer.")
+    }
+    stopifnot(is.logical(tsne.verbose))
+    stopifnot(is.numeric(tsne.max_iter))
+    if(tsne.max_iter <= 0 || !.is_integer(tsne.max_iter)){
+        stop("Specify tsne.max_iter as a positive integer.")
+    }
+    stopifnot(is.numeric(umap.n_neighbors))
+    if(umap.n_neighbors <= 0 || !.is_integer(umap.n_neighbors)){
+        stop("Specify umap.n_neighbors as a positive integer.")
+    }
+    stopifnot(is.numeric(umap.n_components))
+    if(umap.n_components <= 0 || !.is_integer(umap.n_components)){
+        stop("Specify umap.n_components as a positive integer.")
+    }
+    stopifnot(is.logical(silhouette.sammary))
 }

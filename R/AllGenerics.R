@@ -7,8 +7,12 @@ setGeneric("worm_membership",
 # ここにroxygen2のコメントを書く
 # worm_clustering
 setGeneric("worm_clustering",
-    function(object, num.iter=30, thr=1E-10, verbose=FALSE,
-        algorithm=c("MCMI", "OINDSCAL", "CSPA")){
+    function(object,
+             num.iter=30,
+             thr=1E-10,
+             verbose=FALSE,
+             algorithm=c("MCMI", "OINDSCAL", "CSPA")
+             ){
     standardGeneric("worm_clustering")})
 
 # ここにroxygen2のコメントを書く
@@ -20,5 +24,15 @@ setGeneric("worm_evaluate",
 # ここにroxygen2のコメントを書く
 # worm_visualize
 setGeneric("worm_visualize",
-    function(object, algorithm=c("tSNE", "UMAP"), out.dir=tempdir()){
+    function(object,
+             algorithm=c("tSNE", "UMAP"),
+             out.dir=tempdir(),
+             seed=1234,
+             tsne.dims=2,
+             tsne.perplexity=15,
+             tsne.verbose=TRUE,
+             tsne.max_iter=1000,
+             umap.n_neighbors=15,
+             umap.n_components=2,
+             silhouette.sammary=TRUE){
     standardGeneric("worm_visualize")})
