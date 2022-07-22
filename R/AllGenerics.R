@@ -30,9 +30,9 @@ setGeneric("worm_visualize",
              seed=1234,
              tsne.dims=2,
              tsne.perplexity=15,
-             tsne.verbose=TRUE,
+             tsne.verbose=FALSE,
              tsne.max_iter=1000,
              umap.n_neighbors=15,
              umap.n_components=2,
-             silhouette.summary=TRUE){
+             silhouette.summary=FALSE){
     standardGeneric("worm_visualize")})
