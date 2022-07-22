@@ -34,5 +34,5 @@ setGeneric("worm_visualize",
              tsne.max_iter=1000,
              umap.n_neighbors=15,
              umap.n_components=2,
-             silhouette.sammary=TRUE){
+             silhouette.summary=TRUE){
     standardGeneric("worm_visualize")})
