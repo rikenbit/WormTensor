@@ -1,10 +1,12 @@
-# ここにroxygen2のコメントを書く
+#' Generics for WormTensor
+
+#' @export
 # worm_membership
 setGeneric("worm_membership",
     function(object, k){
     standardGeneric("worm_membership")})
 
-# ここにroxygen2のコメントを書く
+#' @export
 # worm_clustering
 setGeneric("worm_clustering",
     function(object,
@@ -15,13 +17,13 @@ setGeneric("worm_clustering",
              ){
     standardGeneric("worm_clustering")})
 
-# ここにroxygen2のコメントを書く
+#' @export
 # worm_evaluate
 setGeneric("worm_evaluate",
     function(object, labels=NULL){
     standardGeneric("worm_evaluate")})
 
-# ここにroxygen2のコメントを書く
+#' @export
 # worm_visualize
 setGeneric("worm_visualize",
     function(object,

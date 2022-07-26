@@ -26,10 +26,10 @@
 #'     label2 = sample(4, length(object@clustering), replace=TRUE),
 #'     label3 = sample(5, length(object@clustering), replace=TRUE))
 #' worm_evaluate(object, labels) -> object_external_Class
-#' @importFrom clusterSim index.G1 # Pseudo-F
-#' @importFrom clValid connectivity # Connectivity
-#' @importFrom aricode ARI # ARI
-#' @importFrom cluster silhouette # Silhouette
+#' @importFrom clusterSim index.G1
+#' @importFrom clValid connectivity
+#' @importFrom aricode ARI
+#' @importFrom cluster silhouette
 #' @export
 setMethod("worm_evaluate", "WormTensor",
     function(object, labels){

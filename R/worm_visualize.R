@@ -51,9 +51,9 @@
 #' @import uwot
 #' @importFrom factoextra fviz_silhouette
 #' @importFrom ggrepel geom_label_repel
-#' @importFrom align_plots
-#' @importFrom ggdraw
-#' @importFrom draw_plot
+#' @importFrom cowplot align_plots
+#' @importFrom cowplot ggdraw
+#' @importFrom cowplot draw_plot
 #' @export
 setMethod("worm_visualize", "WormTensor",
     function(object,

@@ -3,37 +3,39 @@
 \docType{class}
 \name{WormTensor-class}
 \alias{WormTensor-class}
-\title{Title}
+\title{S4 class used by as_worm_tensor.R, worm_membership.R, worm_clustering.R,
+worm_evaluate.R, worm_visualize.R}
 \description{
-Title
+S4 class used by as_worm_tensor.R, worm_membership.R, worm_clustering.R,
+worm_evaluate.R, worm_visualize.R
 }
 \section{Slots}{
 
 \describe{
-\item{\code{dist_matrices}}{list.}
+\item{\code{dist_matrices}}{list}
 
-\item{\code{n_animals}}{numeric.}
+\item{\code{n_animals}}{numeric}
 
-\item{\code{union_cellnames}}{character.}
+\item{\code{union_cellnames}}{character}
 
-\item{\code{n_union_cells}}{numeric.}
+\item{\code{n_union_cells}}{numeric}
 
-\item{\code{membership_tensor}}{Tensor.}
+\item{\code{membership_tensor}}{Tensor}
 
-\item{\code{k}}{numeric.}
+\item{\code{k}}{numeric}
 
-\item{\code{clustering_algorithm}}{character.}
+\item{\code{clustering_algorithm}}{character}
 
-\item{\code{clustering}}{numeric.}
+\item{\code{clustering}}{numeric}
 
-\item{\code{weight}}{numeric.}
+\item{\code{weight}}{numeric}
 
-\item{\code{factor}}{matrix.}
+\item{\code{factor}}{matrix}
 
-\item{\code{consensus}}{matrix.}
+\item{\code{consensus}}{matrix}
 
-\item{\code{eval}}{list.}
+\item{\code{eval}}{list}
 
-\item{\code{dimension_reduction_algorithm}}{character.}
+\item{\code{dimension_reduction_algorithm}}{character}
 }}
 
