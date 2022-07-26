@@ -25,6 +25,5 @@ Downloads distance matrices
 at figshare.
 }
 \examples{
-DL <- worm_download("Euclid", qc="WARN")
-DL$Ds |> as_worm_tensor() -> object
+Ds_Euclid <- worm_download("Euclid", qc="WARN")
 }

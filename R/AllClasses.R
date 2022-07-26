@@ -1,5 +1,26 @@
 # ここにroxygen2のコメントを書く（下のlibraryは削除）
 library("rTensor")
+#' Title
+#'
+#' @slot dist_matrices list.
+#' @slot n_animals numeric.
+#' @slot union_cellnames character.
+#' @slot n_union_cells numeric.
+#' @slot membership_tensor Tensor.
+#' @slot k numeric.
+#' @slot clustering_algorithm character.
+#' @slot clustering numeric.
+#' @slot weight numeric.
+#' @slot factor matrix.
+#' @slot consensus matrix.
+#' @slot eval list.
+#' @slot dimension_reduction_algorithm character.
+#'
+#' @return
+#'
+#' @examples
+#' @import rTensor
+#' @export
 setClass("WormTensor",
     slots = c(
         # Filled by as_worm_tensor()
