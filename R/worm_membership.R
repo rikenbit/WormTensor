@@ -5,7 +5,7 @@
 #' @return WormTensor object with membership tensor added
 #' @examples
 #' # Pipe Operation
-#' worm_download()$Ds |>
+#' worm_download("mSBD", qc="PASS")$Ds |>
 #'     as_worm_tensor() -> object
 #' # k=6
 #' worm_membership(object, k=6) -> object_k6

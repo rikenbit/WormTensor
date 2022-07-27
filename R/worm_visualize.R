@@ -37,7 +37,7 @@
 #'    worm_membership(k=6) |>
 #'    worm_clustering() |>
 #'    worm_evaluate() |>
-#'    worm_visualize("tSNE",out.dir) -> object
+#'    worm_visualize("tSNE",out.dir) -> object_no_labels
 #'
 #' # Pipe Operation (with labels)
 #' worm_download("mSBD", qc="PASS")$Ds |>
@@ -45,7 +45,7 @@
 #'    worm_membership(k=6) |>
 #'    worm_clustering() |>
 #'    worm_evaluate(labels) |>
-#'    worm_visualize("tSNE",out.dir) -> object
+#'    worm_visualize("tSNE",out.dir) -> object_labels
 #' @import ggplot2
 #' @importFrom Rtsne Rtsne
 #' @import uwot

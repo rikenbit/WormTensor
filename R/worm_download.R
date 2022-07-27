@@ -9,6 +9,7 @@
 #' metadata for each animals.
 #' @examples
 #' Ds_Euclid <- worm_download("Euclid", qc="WARN")
+#' Ds_mSBD <- worm_download("mSBD", qc="PASS")
 #' @importFrom usedist dist_subset
 #' @export
 worm_download <- function(distance=c("mSBD", "Euclid"),

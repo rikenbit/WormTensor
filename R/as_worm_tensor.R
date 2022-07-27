@@ -4,7 +4,7 @@
 #' metadata for each animals.
 #' @return An object containing distance matrices and metadata
 #' @examples
-#' worm_download("Euclid", qc="WARN")$Ds |> as_worm_tensor() -> object
+#' worm_download("mSBD", qc="PASS")$Ds |> as_worm_tensor() -> object
 #' @import rTensor
 #' @export
 as_worm_tensor <- function(Ds){

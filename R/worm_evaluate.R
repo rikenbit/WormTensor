@@ -12,7 +12,7 @@
 #' # Internal evaluation
 #' worm_evaluate(object) -> object_internal
 #'
-#' # Externall evaluation by sample labels
+#' # External evaluation by sample labels
 #' labels <- list(
 #'     label1 = sample(3, length(object@clustering), replace=TRUE),
 #'     label2 = sample(4, length(object@clustering), replace=TRUE),
