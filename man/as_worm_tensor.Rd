@@ -19,5 +19,5 @@ Generates WormTensor object
 A WormTensor object is generated from distance matrices.
 }
 \examples{
-worm_download("Euclid", qc="WARN")$Ds |> as_worm_tensor() -> object
+worm_download("mSBD", qc="PASS")$Ds |> as_worm_tensor() -> object
 }

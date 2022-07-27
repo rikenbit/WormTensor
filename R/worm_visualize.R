@@ -10,7 +10,8 @@
 #' (default: TRUE)
 #' @param tsne.max_iter Number of iterations (default: 1000)
 #' @param umap.n_neighbors The size of local neighborhood (default: 15)
-#' @param umap.n_components The dimension of the space to embed into (default: 2)
+#' @param umap.n_components The dimension of the space to embed into
+#' (default: 2)
 #' @param silhouette.summary logical; If true a summary of
 #' cluster silhouettes are printed.
 #' @return Silhouette plots. ARI with a merge result and each animal(with MCMI).
@@ -27,7 +28,9 @@
 #'             worm_clustering() -> object
 #' Ds_mSBD <- worm_download("mSBD", qc="PASS")
 #' labels <- list(
-#'     label1 = replace(Ds_mSBD$labels$Class, which(is.na(Ds_mSBD$labels$Class)), "NA"),
+#'     label1 = replace(Ds_mSBD$labels$Class,
+#'     which(is.na(Ds_mSBD$labels$Class)),
+#'     "NA"),
 #'     label2 = sample(4, length(object@clustering), replace=TRUE),
 #'     label3 = sample(5, length(object@clustering), replace=TRUE))
 #'

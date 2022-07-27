@@ -39,7 +39,8 @@ A visualization result is generated from a WormTensor object}
 
 \item{umap.n_neighbors}{The size of local neighborhood (default: 15)}
 
-\item{umap.n_components}{The dimension of the space to embed into (default: 2)}
+\item{umap.n_components}{The dimension of the space to embed into
+(default: 2)}
 
 \item{silhouette.summary}{logical; If true a summary of
 cluster silhouettes are printed.}
@@ -64,7 +65,9 @@ worm_download("mSBD", qc="PASS")$Ds |>
             worm_clustering() -> object
 Ds_mSBD <- worm_download("mSBD", qc="PASS")
 labels <- list(
-    label1 = replace(Ds_mSBD$labels$Class, which(is.na(Ds_mSBD$labels$Class)), "NA"),
+    label1 = replace(Ds_mSBD$labels$Class,
+    which(is.na(Ds_mSBD$labels$Class)),
+    "NA"),
     label2 = sample(4, length(object@clustering), replace=TRUE),
     label3 = sample(5, length(object@clustering), replace=TRUE))
 
@@ -74,7 +77,7 @@ worm_download("mSBD", qc="PASS")$Ds |>
    worm_membership(k=6) |>
    worm_clustering() |>
    worm_evaluate() |>
-   worm_visualize("tSNE",out.dir) -> object
+   worm_visualize("tSNE",out.dir) -> object_no_labels
 
 # Pipe Operation (with labels)
 worm_download("mSBD", qc="PASS")$Ds |>
@@ -82,5 +85,5 @@ worm_download("mSBD", qc="PASS")$Ds |>
    worm_membership(k=6) |>
    worm_clustering() |>
    worm_evaluate(labels) |>
-   worm_visualize("tSNE",out.dir) -> object
+   worm_visualize("tSNE",out.dir) -> object_labels
 }

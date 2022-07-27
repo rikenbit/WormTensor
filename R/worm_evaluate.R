@@ -22,7 +22,9 @@
 #' # External evaluation by worm_download labels
 #' Ds_mSBD <- worm_download("mSBD", qc="PASS")
 #' labels <- list(
-#'     label1 = replace(Ds_mSBD$labels$Class, which(is.na(Ds_mSBD$labels$Class)), "NA"),
+#'     label1 = replace(Ds_mSBD$labels$Class,
+#'     which(is.na(Ds_mSBD$labels$Class)),
+#'     "NA"),
 #'     label2 = sample(4, length(object@clustering), replace=TRUE),
 #'     label3 = sample(5, length(object@clustering), replace=TRUE))
 #' worm_evaluate(object, labels) -> object_external_Class
@@ -133,21 +135,21 @@ setMethod("worm_evaluate", "WormTensor",
                 unlist() |>
                     as.numeric() -> annotated_count
             # each_animal object
-            df_eval_each_animal <- data.frame(animals = names(object@dist_matrices),
-                                              weight = object@weight,
-                                              ARI = ARI_value,
-                                              ann_count = annotated_count,
-                                              stringsAsFactors = FALSE)
+            df_eval_animal <- data.frame(animals = names(object@dist_matrices),
+                                         weight = object@weight,
+                                         ARI = ARI_value,
+                                         ann_count = annotated_count,
+                                         stringsAsFactors = FALSE)
         }else{
             # case CSPA or OINDSCAL
-            df_eval_each_animal=NULL
+            df_eval_animal=NULL
         }
         # Ouput
         out <- list(internal=int_out,
                     external=ext_out,
                     cellwise=cellwise,
                     external_label=ext_labels, # add labels
-                    each_animal=df_eval_each_animal  # add df
+                    each_animal=df_eval_animal  # add df
                     )
         object@eval <- out
         object

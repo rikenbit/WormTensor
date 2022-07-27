@@ -2,7 +2,8 @@
 #' A clustering result is generated from a membership tensor.
 #' @param object WormTensor object with a membership tensor
 #' @param num.iter Upper limit of iterations (Default value is 30)
-#' @param thr Lower limit of relative change in estimates (Default value is 1E-10)
+#' @param thr Lower limit of relative change in estimates
+#' (Default value is 1E-10)
 #' @param verbose Control message
 #' @param algorithm Clustering methods
 #' @return WormTensor object with a clustering result added
@@ -12,7 +13,7 @@
 #'     as_worm_tensor() |>
 #'         worm_membership(k=6) -> object
 #' worm_clustering(object, verbose=TRUE) -> object_mcmi
-#' worm_clustering(object, algorithm="OINDSCAL", verbose=TRUE) -> object_oindscal
+#' worm_clustering(object, algorithm="OINDSCAL", verbose=TRUE) -> object_oind
 #' worm_clustering(object, algorithm="CSPA", verbose=TRUE) -> object_cspa
 #' @import rTensor
 #' @export
@@ -93,7 +94,8 @@ setMethod("worm_clustering",
         G <- ttm(ttm(ttm(A, t(U), m=1), t(U), m=2), t(W), m=3)
         A_bar <- ttm(ttm(ttm(G, U, m=1), U, m=2), W, m=3)
         RecError[iter] <- .recErrorTensor(A, A_bar)
-        RelChange[iter] <- abs(RecError[iter-1] - RecError[iter]) / RecError[iter]
+        RelChange[iter] <- abs(RecError[iter-1] - RecError[iter]) /
+            RecError[iter]
         if(verbose){
              cat(paste0(iter - 1, " / ", num.iter,
                 " |Previous Error - Error| / Error = ", RelChange[iter], "\n"))

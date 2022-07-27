@@ -26,4 +26,5 @@ at figshare.
 }
 \examples{
 Ds_Euclid <- worm_download("Euclid", qc="WARN")
+Ds_mSBD <- worm_download("mSBD", qc="PASS")
 }
