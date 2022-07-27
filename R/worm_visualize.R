@@ -54,6 +54,7 @@
 #' @importFrom cowplot align_plots
 #' @importFrom cowplot ggdraw
 #' @importFrom cowplot draw_plot
+#' @importFrom cowplot theme_half_open
 #' @export
 setMethod("worm_visualize", "WormTensor",
     function(object,
