@@ -9,19 +9,12 @@ worm_download()$Ds |>
                 worm_evaluate() |>
                     worm_visualize() -> object
 
-# ここにテストを書いていく
-# silhouette plot of each cell
-filename1 <- paste0(out.dir, "/figures/silhouette.png")
+######### no labels #########
+filename1 <- paste0(out.dir, "/figures/Silhouette.png")
 expect_true(file.exists(filename1))
 
-filename2 <- paste0(out.dir, "/XXX")
+filename2 <- paste0(out.dir, "/figures/Cluster.png")
 expect_true(file.exists(filename2))
 
-filename3 <- paste0(out.dir, "/XXX")
+filename3 <- paste0(out.dir, "/figures/no_identified.png")
 expect_true(file.exists(filename3))
-
-filename4 <- paste0(out.dir, "/XXX")
-expect_true(file.exists(filename4))
-
-filename5 <- paste0(out.dir, "/XXX")
-expect_true(file.exists(filename5))
