@@ -11,6 +11,8 @@
 #' Ds_Euclid <- worm_download("Euclid", qc="WARN")
 #' Ds_mSBD <- worm_download("mSBD", qc="PASS")
 #' @importFrom usedist dist_subset
+#' @importFrom utils download.file
+#' @importFrom utils read.csv
 #' @export
 worm_download <- function(distance=c("mSBD", "Euclid"),
                           qc=c("PASS", "WARN", "FAIL")){

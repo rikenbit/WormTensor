@@ -6,6 +6,7 @@
 #' @examples
 #' worm_download("mSBD", qc="PASS")$Ds |> as_worm_tensor() -> object
 #' @import rTensor
+#' @importFrom methods new
 #' @export
 as_worm_tensor <- function(Ds){
     object <- new("WormTensor")

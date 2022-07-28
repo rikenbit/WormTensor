@@ -58,6 +58,8 @@
 #' @importFrom cowplot ggdraw
 #' @importFrom cowplot draw_plot
 #' @importFrom cowplot theme_half_open
+#' @importFrom stats as.dist
+#' @importFrom stats dist
 #' @export
 setMethod("worm_visualize", "WormTensor",
     function(object,

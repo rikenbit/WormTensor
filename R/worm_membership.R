@@ -10,6 +10,8 @@
 #' # k=6
 #' worm_membership(object, k=6) -> object_k6
 #' @import rTensor
+#' @importFrom stats cutree
+#' @importFrom stats hclust
 #' @export
 setMethod("worm_membership",
     signature(object="WormTensor"),

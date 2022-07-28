@@ -16,6 +16,10 @@
 #' worm_clustering(object, algorithm="OINDSCAL", verbose=TRUE) -> object_oind
 #' worm_clustering(object, algorithm="CSPA", verbose=TRUE) -> object_cspa
 #' @import rTensor
+#' @importFrom stats as.dist
+#' @importFrom stats cutree
+#' @importFrom stats dist
+#' @importFrom stats hclust
 #' @export
 setMethod("worm_clustering",
     signature(object="WormTensor"),

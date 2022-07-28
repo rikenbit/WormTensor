@@ -39,6 +39,9 @@
 #' Ds_mSBD <- worm_distance(X, "mSBD")
 #' @importFrom dtwclust SBD
 #' @importFrom dtwclust NCCc
+#' @importFrom dtwclust zscore
+#' @importFrom stats as.dist
+#' @importFrom utils combn
 #' @export
 worm_distance <- function(data, distance=c("mSBD", "SBD", "Euclid")){
     # Argument Check

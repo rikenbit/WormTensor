@@ -32,6 +32,11 @@
 #' @importFrom clValid connectivity
 #' @importFrom aricode ARI
 #' @importFrom cluster silhouette
+#' @importFrom stats as.dist
+#' @importFrom stats cutree
+#' @importFrom stats dist
+#' @importFrom stats hclust
+#' @importFrom stats na.omit
 #' @export
 setMethod("worm_evaluate", "WormTensor",
     function(object, labels){
