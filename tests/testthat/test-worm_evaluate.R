@@ -7,7 +7,7 @@ worm_download()$Ds |>
 ######### Internal Validity Indices (w/o Labels) #########
 worm_evaluate(object) -> object_internal
 
-expect_equal(length(object_internal@eval$internal), 2)
+expect_equal(length(object_internal@eval$internal), 3)
 expect_true(is.numeric(object_internal@eval$internal$PseudoF))
 expect_true(is.numeric(object_internal@eval$internal$Connectivity))
 

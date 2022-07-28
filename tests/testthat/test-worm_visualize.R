@@ -7,10 +7,11 @@ worm_download()$Ds |>
         worm_membership(k=6) |>
             worm_clustering() |>
                 worm_evaluate() |>
-                    worm_visualize(out.dir) -> object
+                    worm_visualize() -> object
 
 # ここにテストを書いていく
-filename1 <- paste0(out.dir, "/XXX")
+# silhouette plot of each cell
+filename1 <- paste0(out.dir, "/figures/silhouette.png")
 expect_true(file.exists(filename1))
 
 filename2 <- paste0(out.dir, "/XXX")
