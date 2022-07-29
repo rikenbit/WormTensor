@@ -17,6 +17,8 @@
 #' @return Silhouette plots. ARI with a merge result and each animal(with MCMI).
 #'  Dimensional reduction Plots colored by cluster, no. of identified cells,
 #'  consistency(with labels), Class_label(with labels).
+#' @references The .dist_nn function is quoted from dist_nn
+#' (not exported function) in package uwot(\url{https://github.com/jlmelville/uwot/tree/f467185c8cbcd158feb60dde608c9da153ed10d7}).
 #' @examples
 #' # Temporary directory to save figures
 #' out.dir <- tempdir()
@@ -121,9 +123,9 @@ setMethod("worm_visualize", "WormTensor",
                            metric = "precomputed",
                            n_neighbors = umap.n_neighbors,
                            n_components = umap.n_components,
-                           nn_method = uwot:::dist_nn(cls_dist,
-                                                      k = attr(cls_dist, "Size")
-                                                      )
+                           nn_method = .dist_nn(cls_dist,
+                                                k = attr(cls_dist, "Size")
+                                                )
                            )
         cord_x <- c("UMAP-1")
         cord_y <- c("UMAP-2")
@@ -415,4 +417,28 @@ setMethod("worm_visualize", "WormTensor",
         stop("Specify umap.n_components as a positive integer.")
     }
     stopifnot(is.logical(silhouette.summary))
+}
+
+.dist_nn <- function(X, k, include_self = TRUE) {
+    X <- as.matrix(X)
+
+    if (!include_self) {
+        k <- k + 1
+    }
+
+    nn_idx <- t(apply(X, 2, order))[, 1:k]
+    nn_dist <- matrix(0, nrow = nrow(X), ncol = k)
+    for (i in seq_len(nrow(nn_idx))) {
+        nn_dist[i, ] <- X[i, nn_idx[i, ]]
+    }
+
+    if (!include_self) {
+        nn_idx <- nn_idx[, 2:ncol(nn_idx)]
+        nn_dist <- nn_dist[, 2:ncol(nn_dist)]
+    }
+
+    attr(nn_idx, "dimnames") <- NULL
+    attr(nn_dist, "dimnames") <- NULL
+
+    list(idx = nn_idx, dist = nn_dist)
 }

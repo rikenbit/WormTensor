@@ -87,3 +87,7 @@ worm_download("mSBD", qc="PASS")$Ds |>
    worm_evaluate(labels) |>
    worm_visualize("tSNE",out.dir) -> object_labels
 }
+\references{
+The .dist_nn function is quoted from dist_nn
+(not exported function) in package uwot(\url{https://github.com/jlmelville/uwot/tree/f467185c8cbcd158feb60dde608c9da153ed10d7}).
+}
