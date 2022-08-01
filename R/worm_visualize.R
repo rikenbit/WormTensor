@@ -318,7 +318,8 @@ setMethod("worm_visualize", "WormTensor",
             theme_half_open() +
             theme(text = element_text(size = 36)) +
             theme(axis.title.y=element_text(colour = "red", size = 36)) +
-            geom_smooth(method="lm",
+            geom_smooth(formula = y ~ x,
+                        method="lm",
                         size =0.5,
                         se = TRUE,
                         alpha = 0.4,
@@ -339,7 +340,8 @@ setMethod("worm_visualize", "WormTensor",
             geom_line(color = "black", size= 2) +
             scale_x_discrete(limits=df_sort_weight$animals) +
             scale_y_continuous(position = "right") +
-            geom_smooth(method="lm",
+            geom_smooth(formula = y ~ x,
+                        method="lm",
                         size =0.5,
                         se = TRUE,
                         alpha = 0.4,
