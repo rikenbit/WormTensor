@@ -1,7 +1,7 @@
 # Pipe Operation
 worm_download()$Ds |>
     as_worm_tensor() |>
-        worm_membership(k=3) -> object
+        worm_membership(k=6) -> object
 
 expect_equal(length(object@clustering), 0)
 

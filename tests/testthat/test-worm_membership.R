@@ -9,8 +9,8 @@ expect_equal(is(object_k3@membership_tensor), "Tensor")
 expect_equal(object_k3@k, 3)
 
 # w/ k=4
-worm_membership(object, k=4) -> object_k4
+worm_membership(object, k=6) -> object_k6
 
-expect_equal(is(object_k4@membership_tensor), "Tensor")
-expect_equal(object_k4@k, 4)
+expect_equal(is(object_k6@membership_tensor), "Tensor")
+expect_equal(object_k6@k, 6)
 

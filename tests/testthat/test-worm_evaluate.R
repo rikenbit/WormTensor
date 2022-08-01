@@ -10,6 +10,7 @@ worm_evaluate(object) -> object_internal
 expect_equal(length(object_internal@eval$internal), 3)
 expect_true(is.numeric(object_internal@eval$internal$PseudoF))
 expect_true(is.numeric(object_internal@eval$internal$Connectivity))
+expect_true(is.numeric(object_internal@eval$internal$silhouette))
 
 ######### External Validity Indices (w Labels) #########
 labels <- list(
@@ -35,3 +36,7 @@ expect_true(
     all(is.numeric(unlist(object_external@eval$external$label2))))
 expect_true(
     all(is.numeric(unlist(object_external@eval$external$label3))))
+
+expect_true(length(object_external@eval$cellwise) == 3)
+# data for weight_ARI_no.png
+expect_true(length(object_external@eval$each_animal) == 4)

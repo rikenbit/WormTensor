@@ -23,7 +23,7 @@
 #' @export
 setMethod("worm_clustering",
     signature(object="WormTensor"),
-    function(object, num.iter, thr, verbose, algorithm){
+    function(object, algorithm, num.iter, thr, verbose){
     # Argument Check
     .check_worm_clustering(object, num.iter, thr, verbose)
     algorithm <- match.arg(algorithm)

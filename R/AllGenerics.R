@@ -30,10 +30,10 @@ setGeneric("worm_membership",
 # worm_clustering
 setGeneric("worm_clustering",
     function(object,
+             algorithm=c("MCMI", "OINDSCAL", "CSPA"),
              num.iter=30,
              thr=1E-10,
-             verbose=FALSE,
-             algorithm=c("MCMI", "OINDSCAL", "CSPA")
+             verbose=FALSE
              ){
     standardGeneric("worm_clustering")})
 
