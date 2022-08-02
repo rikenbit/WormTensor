@@ -1,7 +1,7 @@
 # Temporary directory to save figures
 out.dir <- tempdir()
 
-######### No Labels #########
+######### without Labels #########
 worm_download()$Ds |>
     as_worm_tensor() |>
         worm_membership(k=6) |>
@@ -64,3 +64,36 @@ expect_true(file.exists(filename9))
 filename10 <- paste0(out.dir, "/figures/Class_label3.png")
 expect_true(file.exists(filename10))
 
+######### CSPA (without Labels) #########
+worm_download()$Ds |>
+    as_worm_tensor() |>
+    worm_membership(k=6) |>
+    worm_clustering("CSPA") |>
+    worm_evaluate() |>
+    worm_visualize() -> object
+
+filename1 <- paste0(out.dir, "/figures/Silhouette.png")
+expect_true(file.exists(filename1))
+
+filename2 <- paste0(out.dir, "/figures/Cluster.png")
+expect_true(file.exists(filename2))
+
+filename3 <- paste0(out.dir, "/figures/no_identified.png")
+expect_true(file.exists(filename3))
+
+######### OINDSCAL (without Labels) #########
+worm_download()$Ds |>
+    as_worm_tensor() |>
+    worm_membership(k=6) |>
+    worm_clustering("OINDSCAL") |>
+    worm_evaluate() |>
+    worm_visualize() -> object
+
+filename1 <- paste0(out.dir, "/figures/Silhouette.png")
+expect_true(file.exists(filename1))
+
+filename2 <- paste0(out.dir, "/figures/Cluster.png")
+expect_true(file.exists(filename2))
+
+filename3 <- paste0(out.dir, "/figures/no_identified.png")
+expect_true(file.exists(filename3))
