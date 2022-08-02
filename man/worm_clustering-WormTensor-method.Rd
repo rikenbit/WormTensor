@@ -7,14 +7,16 @@ A clustering result is generated from a membership tensor.}
 \usage{
 \S4method{worm_clustering}{WormTensor}(
   object,
+  algorithm = c("MCMI", "OINDSCAL", "CSPA"),
   num.iter = 30,
   thr = 1e-10,
-  verbose = FALSE,
-  algorithm = c("MCMI", "OINDSCAL", "CSPA")
+  verbose = FALSE
 )
 }
 \arguments{
 \item{object}{WormTensor object with a membership tensor}
+
+\item{algorithm}{Clustering methods}
 
 \item{num.iter}{Upper limit of iterations (Default value is 30)}
 
@@ -22,8 +24,6 @@ A clustering result is generated from a membership tensor.}
 (Default value is 1E-10)}
 
 \item{verbose}{Control message}
-
-\item{algorithm}{Clustering methods}
 }
 \value{
 WormTensor object with a clustering result added

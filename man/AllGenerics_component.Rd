@@ -13,10 +13,10 @@ worm_membership(object, k)
 
 worm_clustering(
   object,
+  algorithm = c("MCMI", "OINDSCAL", "CSPA"),
   num.iter = 30,
   thr = 1e-10,
-  verbose = FALSE,
-  algorithm = c("MCMI", "OINDSCAL", "CSPA")
+  verbose = FALSE
 )
 
 worm_evaluate(object, labels = NULL)
@@ -40,14 +40,14 @@ worm_visualize(
 
 \item{k}{Assumed number of clusters}
 
+\item{algorithm}{Dimensional reduction methods}
+
 \item{num.iter}{Upper limit of iterations (Default value is 30)}
 
 \item{thr}{Lower limit of relative change in estimates
 (Default value is 1E-10)}
 
 \item{verbose}{Control message}
-
-\item{algorithm}{Dimensional reduction methods}
 
 \item{labels}{Labels for external evaluation}
 
