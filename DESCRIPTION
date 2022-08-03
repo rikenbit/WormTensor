@@ -20,6 +20,8 @@ LazyData: true
 URL: https://github.com/rikenbit/WormTensor
 BugReports: https://github.com/rikenbit/WormTensor/issues
 Suggests: 
+    knitr,
+    rmarkdown,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Depends: R (>= 4.1.0)
@@ -39,3 +41,4 @@ Imports:
     cowplot,
     methods
 RoxygenNote: 7.2.0
+VignetteBuilder: knitr
