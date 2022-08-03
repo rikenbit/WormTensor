@@ -1,5 +1,16 @@
 ---
-title: "WormTensor"
+title: "Clustering and visualization of time-series whole-brain activity data of C. elegans using `WormTensor`"
+author:
+- name: Kentaro Yamamoto
+  affiliation: Laboratory for Bioinformatics Research,
+    RIKEN Center for Biosystems Dynamics Research
+- name: Koki Tsuyuzaki
+  affiliation: Laboratory for Bioinformatics Research,
+    RIKEN Center for Biosystems Dynamics Research
+- name: Itoshi Nikaido
+  affiliation: Laboratory for Bioinformatics Research,
+    RIKEN Center for Biosystems Dynamics Research
+  email: yamaken37.the.answer@gmail.com
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{WormTensor}
