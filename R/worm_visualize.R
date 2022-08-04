@@ -36,7 +36,7 @@
 #'     label2 = sample(4, length(object@clustering), replace=TRUE),
 #'     label3 = sample(5, length(object@clustering), replace=TRUE))
 #'
-#' # Pipe Operation (no labels)
+#' # Pipe Operation (without Labels)
 #' worm_download("mSBD", qc="PASS")$Ds |>
 #'    as_worm_tensor() |>
 #'    worm_membership(k=6) |>
@@ -44,7 +44,7 @@
 #'    worm_evaluate() |>
 #'    worm_visualize("tSNE",out.dir) -> object_no_labels
 #'
-#' # Pipe Operation (with labels)
+#' # Pipe Operation (with Labels)
 #' worm_download("mSBD", qc="PASS")$Ds |>
 #'    as_worm_tensor() |>
 #'    worm_membership(k=6) |>
