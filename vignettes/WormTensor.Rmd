@@ -1,4 +1,4 @@
-1---
+---
 title: "Clustering and visualization of time-series whole-brain activity data of C. elegans using `WormTensor`"
 author:
 - name: Kentaro Yamamoto
@@ -70,6 +70,14 @@ object <- worm_evaluate(object)
 ```{r worm_visualize, echo=TRUE}
 object <- worm_visualize(object)
 ```
+![Figure1a : Silhouette plots](Silhouette_wo.png){width=100%}
+
+![Figure1b : Dimensional reduction Plots colored by cluster](Cluster_wo.png){width=100%}
+
+![Figure1c : Dimensional reduction Plots colored by no. of identified cells](no_identified_wo.png){width=100%}
+
+![Figure1d : ARI with a merge result and each animal(with MCMI)](weight_ARI_no_wo.png){width=100%}
+
 
 # Pipe Operation
 The above functions can also be run by connecting them with R's native pipe.
@@ -84,7 +92,7 @@ worm_download()$Ds |>
 
 # Pipe Operation (with Labels)
 If you have a label for the cells, you can use it for external evaluation. 
-```{r worm_evaluate, echo=TRUE}
+```{r pipe_operation with Labels, echo=TRUE}
 # Sample Labels
 worm_download()$Ds |>
     as_worm_tensor() |>
@@ -102,6 +110,18 @@ worm_download()$Ds |>
                 worm_evaluate(labels) |>
                     worm_visualize() -> object_labels
 ```
+![Figure2a : Silhouette plots](Silhouette.png){width=100%}
+
+![Figure2b : Dimensional reduction Plots colored by cluster](Cluster.png){width=100%}
+
+![Figure2c : Dimensional reduction Plots colored by no. of identified cells](no_identified.png){width=100%}
+
+![Figure2d : ARI with a merge result and each animal(with MCMI)](weight_ARI_no.png){width=100%}
+
+![Figure2e : Dimensional reduction Plots colored by label](Class_label1.png){width=100%}
+
+![Figure2f : Consistency of labels and cluster members](consistency_label1.png){width=100%}
+
 
 # worm_distance
 `worm_distance` helps you analyze your time-series data matrices with `WormTensor`.
