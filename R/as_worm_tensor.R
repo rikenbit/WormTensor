@@ -9,6 +9,7 @@
 #' @importFrom methods new
 #' @export
 as_worm_tensor <- function(Ds){
+    .check_as_worm_tensor(Ds)
     object <- new("WormTensor")
     object@dist_matrices <- Ds
     object@n_animals <- length(Ds)
@@ -25,4 +26,10 @@ as_worm_tensor <- function(Ds){
         sort(unique(unlist(lapply(Ds, function(x){attr(x, "dimnames")})))) -> res
     }
     res
+}
+
+.check_as_worm_tensor <- function(Ds){
+    lapply(Ds, function(x){
+        stopifnot(is(x) == "dist")
+    })
 }
