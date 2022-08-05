@@ -45,7 +45,7 @@ worm_download <- function(distance=c("mSBD", "Euclid"),
     }
     # Labels
     tempfile2 <- paste0(tmpdir, "/labels.csv")
-    download.file("https://figshare.com/ndownloader/files/35940755",
+    download.file("https://figshare.com/ndownloader/files/36186483",
                   tempfile2)
     labels <- read.csv(tempfile2)
     # Output
