@@ -7,7 +7,7 @@ worm_download()$Ds |>
         worm_membership(k=6) |>
             worm_clustering() |>
                 worm_evaluate() |>
-                    worm_visualize() -> object
+                    worm_visualize(out.dir) -> object
 
 filename1 <- paste0(out.dir, "/figures/Silhouette.png")
 expect_true(file.exists(filename1))
@@ -32,7 +32,7 @@ worm_download()$Ds |>
         worm_membership(k=6) |>
             worm_clustering() |>
                 worm_evaluate(labels) |>
-                    worm_visualize() -> object_labels
+                    worm_visualize(out.dir) -> object_labels
 
 filename1 <- paste0(out.dir, "/figures/Silhouette.png")
 expect_true(file.exists(filename1))
@@ -70,7 +70,7 @@ worm_download()$Ds |>
     worm_membership(k=6) |>
     worm_clustering("CSPA") |>
     worm_evaluate() |>
-    worm_visualize() -> object
+    worm_visualize(out.dir) -> object
 
 filename1 <- paste0(out.dir, "/figures/Silhouette.png")
 expect_true(file.exists(filename1))
@@ -87,7 +87,7 @@ worm_download()$Ds |>
     worm_membership(k=6) |>
     worm_clustering("OINDSCAL") |>
     worm_evaluate() |>
-    worm_visualize() -> object
+    worm_visualize(out.dir) -> object
 
 filename1 <- paste0(out.dir, "/figures/Silhouette.png")
 expect_true(file.exists(filename1))

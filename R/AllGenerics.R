@@ -48,8 +48,8 @@ setGeneric("worm_evaluate",
 
 #' @rdname AllGenerics_component
 #' @param object WormTensor object
-#' @param algorithm Dimensional reduction methods
 #' @param out.dir Output directory (default: tempdir())
+#' @param algorithm Dimensional reduction methods
 #' @param seed Arguments passed to set.seed (default: 1234)
 #' @param tsne.dims Output dimensionality (default: 2)
 #' @param tsne.perplexity Perplexity paramete (default: 15)
@@ -65,8 +65,8 @@ setGeneric("worm_evaluate",
 # worm_visualize
 setGeneric("worm_visualize",
     function(object,
-             algorithm=c("tSNE", "UMAP"),
              out.dir=tempdir(),
+             algorithm=c("tSNE", "UMAP"),
              seed=1234,
              tsne.dims=2,
              tsne.perplexity=15,

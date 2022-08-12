@@ -1,8 +1,8 @@
 #' Plots evaluation result
 #' A visualization result is generated from a WormTensor object
 #' @param object WormTensor object with a result of worm_evaluate
-#' @param algorithm Dimensional reduction methods
 #' @param out.dir Output directory (default: tempdir())
+#' @param algorithm Dimensional reduction methods
 #' @param seed Arguments passed to set.seed (default: 1234)
 #' @param tsne.dims Output dimensionality (default: 2)
 #' @param tsne.perplexity Perplexity paramete (default: 15)
@@ -42,7 +42,7 @@
 #'    worm_membership(k=6) |>
 #'    worm_clustering() |>
 #'    worm_evaluate() |>
-#'    worm_visualize("tSNE",out.dir) -> object_no_labels
+#'    worm_visualize(out.dir) -> object_no_labels
 #'
 #' # Pipe Operation (with Labels)
 #' worm_download("mSBD", qc="PASS")$Ds |>
@@ -50,7 +50,7 @@
 #'    worm_membership(k=6) |>
 #'    worm_clustering() |>
 #'    worm_evaluate(labels) |>
-#'    worm_visualize("tSNE",out.dir) -> object_labels
+#'    worm_visualize(out.dir) -> object_labels
 #' @import ggplot2
 #' @importFrom Rtsne Rtsne
 #' @import uwot
@@ -65,8 +65,8 @@
 #' @export
 setMethod("worm_visualize", "WormTensor",
     function(object,
-             algorithm,
              out.dir,
+             algorithm,
              seed,
              tsne.dims,
              tsne.perplexity,
