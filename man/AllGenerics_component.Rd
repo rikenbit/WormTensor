@@ -23,8 +23,8 @@ worm_evaluate(object, labels = NULL)
 
 worm_visualize(
   object,
-  algorithm = c("tSNE", "UMAP"),
   out.dir = tempdir(),
+  algorithm = c("tSNE", "UMAP"),
   seed = 1234,
   tsne.dims = 2,
   tsne.perplexity = 15,

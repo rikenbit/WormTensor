@@ -7,6 +7,7 @@
 #' worm_download("mSBD", qc="PASS")$Ds |> as_worm_tensor() -> object
 #' @import rTensor
 #' @importFrom methods new
+#' @importFrom methods is
 #' @export
 as_worm_tensor <- function(Ds){
     .check_as_worm_tensor(Ds)

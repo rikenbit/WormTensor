@@ -7,8 +7,8 @@ A visualization result is generated from a WormTensor object}
 \usage{
 \S4method{worm_visualize}{WormTensor}(
   object,
-  algorithm = c("tSNE", "UMAP"),
   out.dir = tempdir(),
+  algorithm = c("tSNE", "UMAP"),
   seed = 1234,
   tsne.dims = 2,
   tsne.perplexity = 15,
@@ -22,9 +22,9 @@ A visualization result is generated from a WormTensor object}
 \arguments{
 \item{object}{WormTensor object with a result of worm_evaluate}
 
-\item{algorithm}{Dimensional reduction methods}
-
 \item{out.dir}{Output directory (default: tempdir())}
+
+\item{algorithm}{Dimensional reduction methods}
 
 \item{seed}{Arguments passed to set.seed (default: 1234)}
 
@@ -71,21 +71,21 @@ labels <- list(
     label2 = sample(4, length(object@clustering), replace=TRUE),
     label3 = sample(5, length(object@clustering), replace=TRUE))
 
-# Pipe Operation (no labels)
+# Pipe Operation (without Labels)
 worm_download("mSBD", qc="PASS")$Ds |>
    as_worm_tensor() |>
    worm_membership(k=6) |>
    worm_clustering() |>
    worm_evaluate() |>
-   worm_visualize("tSNE",out.dir) -> object_no_labels
+   worm_visualize(out.dir) -> object_no_labels
 
-# Pipe Operation (with labels)
+# Pipe Operation (with Labels)
 worm_download("mSBD", qc="PASS")$Ds |>
    as_worm_tensor() |>
    worm_membership(k=6) |>
    worm_clustering() |>
    worm_evaluate(labels) |>
-   worm_visualize("tSNE",out.dir) -> object_labels
+   worm_visualize(out.dir) -> object_labels
 }
 \references{
 The .dist_nn function is quoted from dist_nn

@@ -3,8 +3,7 @@
 \name{worm_download}
 \alias{worm_download}
 \title{Downloads distance matrices
-28 animals' data including 24 normal and 4 noisy are retrieved from
-at figshare.}
+28 animals' data including 24 normal and 4 noisy are retrieved from figshare.}
 \usage{
 worm_download(distance = c("mSBD", "Euclid"), qc = c("PASS", "WARN", "FAIL"))
 }
@@ -21,8 +20,7 @@ metadata for each animals.
 }
 \description{
 Downloads distance matrices
-28 animals' data including 24 normal and 4 noisy are retrieved from
-at figshare.
+28 animals' data including 24 normal and 4 noisy are retrieved from figshare.
 }
 \examples{
 Ds_Euclid <- worm_download("Euclid", qc="WARN")

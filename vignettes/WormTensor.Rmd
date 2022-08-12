@@ -110,13 +110,13 @@ worm_download()$Ds |>
                 worm_evaluate(labels) |>
                     worm_visualize() -> object_labels
 ```
-![Figure2a : Silhouette plots](Silhouette.png){width=100%}
+![Figure2a : Silhouette plots](Silhouette_wo.png){width=100%}
 
-![Figure2b : Dimensional reduction Plots colored by cluster](Cluster.png){width=100%}
+![Figure2b : Dimensional reduction Plots colored by cluster](Cluster_wo.png){width=100%}
 
-![Figure2c : Dimensional reduction Plots colored by no. of identified cells](no_identified.png){width=100%}
+![Figure2c : Dimensional reduction Plots colored by no. of identified cells](no_identified_wo.png){width=100%}
 
-![Figure2d : ARI with a merge result and each animal(with MCMI)](weight_ARI_no.png){width=100%}
+![Figure2d : ARI with a merge result and each animal(with MCMI)](weight_ARI_no_wo.png){width=100%}
 
 ![Figure2e : Dimensional reduction Plots colored by label](Class_label1.png){width=100%}
 
