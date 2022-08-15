@@ -41,7 +41,7 @@ object <- worm_download()
 
 # as_worm_tensor
 `as_worm_tensor` is a function to generate a `WormTensor` object from distance matrices.
-A `WormTensor` object S4 class is used by `as_worm_tensor`, `worm_membership`, `worm_clustering`, `worm_evaluate`, and `worm_visualize`.
+A `WormTensor` object S4 class is used by `worm_membership`, `worm_clustering`, `worm_evaluate`, and `worm_visualize`.
 ```{r as_worm_tensor, echo=TRUE}
 object <- as_worm_tensor(object$Ds)
 ```
