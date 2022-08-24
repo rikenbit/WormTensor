@@ -21,16 +21,18 @@ as_worm_tensor <- function(Ds){
 
 .union_cellnames <- function(Ds){
     # for worm_download data
-    sort(unique(unlist(lapply(Ds, function(x){attr(x, "Labels")})))) -> res
-    # for sample data (worm_distance.R's Toy data)
-    if(is.null(res)){
-        sort(unique(unlist(lapply(Ds, function(x){attr(x, "dimnames")})))) -> res
-    }
+    Ds |>
+        lapply(function(x){attr(x, "Labels")}) |>
+            unlist() |>
+                unique() |>
+                    sort() -> res
     res
 }
 
 .check_as_worm_tensor <- function(Ds){
-    lapply(Ds, function(x){
-        stopifnot(is(x) == "dist")
-    })
+    Ds |>
+        lapply(function(x){
+            stopifnot(is(x) == "dist")
+            }
+        )
 }

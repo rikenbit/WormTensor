@@ -7,4 +7,5 @@ utils::globalVariables(c("cord_1",
                          "consistency",
                          "Class",
                          "animals",
-                         "ann_count"))
+                         "ann_count")
+                       )
