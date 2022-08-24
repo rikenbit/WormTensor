@@ -51,9 +51,13 @@ setMethod("worm_evaluate", "WormTensor",
             data <- 1 - object@consensus
         }
         # Clustering results for each animals
-        Cs <- lapply(object@dist_matrices, function(d, k){
-            cutree(hclust(d, method="ward.D2"), k)
-        }, k=object@k)
+        Cs <- lapply(object@dist_matrices,
+            function(d, k){
+                d |>
+                    hclust(method="ward.D2") |>
+                        cutree(k)
+            },
+            k=object@k)
         # dist for silhouette, connectivity
         if(object@clustering_algorithm %in% c("MCMI", "OINDSCAL")){
             cls_dist <- dist(data)
@@ -135,8 +139,7 @@ setMethod("worm_evaluate", "WormTensor",
                 unlist() |>
                     as.numeric() -> ARI_value
             # annotated count
-            lapply(object@dist_matrices,
-                   function(x){attr(x,"Size")}) |>
+            lapply(object@dist_matrices, function(x){attr(x,"Size")}) |>
                 unlist() |>
                     as.numeric() -> annotated_count
             # each_animal object
@@ -184,7 +187,6 @@ setMethod("worm_evaluate", "WormTensor",
     # Connectivity
     connectivity(cls_dist, cluster)
 }
-
 ######### External Validity Indices (w Labels) #########
 .fmeasure <- function(cluster, label){
     ctbl <- table(cluster, label)
@@ -303,9 +305,7 @@ setMethod("worm_evaluate", "WormTensor",
 }
 ######### no_identified #########
 .no_identified <- function(object){
-    lapply(object@dist_matrices, function(d){
-        attr(d, "Labels")
-    }) |>
+    lapply(object@dist_matrices, function(d){attr(d, "Labels")}) |>
         unlist() -> all_cellname
     all_cellname |>
         table() |>
