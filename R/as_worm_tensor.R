@@ -1,7 +1,6 @@
 #' Generates WormTensor object
 #' A WormTensor object is generated from distance matrices.
-#' @param Ds A List of containing distance matrices. The list also includes
-#' metadata for each animals.
+#' @param Ds A list containing distance matrices
 #' @return An object containing distance matrices and metadata
 #' @examples
 #' worm_download("mSBD", qc="PASS")$Ds |> as_worm_tensor() -> object
@@ -20,7 +19,6 @@ as_worm_tensor <- function(Ds){
 }
 
 .union_cellnames <- function(Ds){
-    # for worm_download data
     Ds |>
         lapply(function(x){attr(x, "Labels")}) |>
             unlist() |>

@@ -1,8 +1,8 @@
 #' Generates clustering result
 #' A clustering result is generated from a membership tensor.
 #' @param object WormTensor object with a membership tensor
-#' @param num.iter Upper limit of iterations (Default value is 30)
-#' @param thr Lower limit of relative change in estimates
+#' @param num.iter The upper limit of iterations (Default value is 30)
+#' @param thr The lower limit of relative change in estimates
 #' (Default value is 1E-10)
 #' @param verbose Control message
 #' @param algorithm Clustering methods

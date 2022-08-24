@@ -21,8 +21,8 @@ setGeneric("worm_membership",
 
 #' @rdname AllGenerics_component
 #' @param object WormTensor object
-#' @param num.iter Upper limit of iterations (Default value is 30)
-#' @param thr Lower limit of relative change in estimates
+#' @param num.iter The upper limit of iterations (Default value is 30)
+#' @param thr The lower limit of relative change in estimates
 #' (Default value is 1E-10)
 #' @param verbose Control message
 #' @param algorithm Clustering methods
@@ -55,7 +55,7 @@ setGeneric("worm_evaluate",
 #' @param tsne.perplexity Perplexity paramete (default: 15)
 #' @param tsne.verbose logical; Whether progress updates should be printed
 #' (default: TRUE)
-#' @param tsne.max_iter Number of iterations (default: 1000)
+#' @param tsne.max_iter The number of iterations (default: 1000)
 #' @param umap.n_neighbors The size of local neighborhood (default: 15)
 #' @param umap.n_components The dimension of the space to embed into
 #' (default: 2)

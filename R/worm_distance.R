@@ -4,7 +4,7 @@
 #' @param data Time-series matrices
 #' @param distance "mSBD" or "SBD" or "Euclid" can be specified. mSBD means
 #' modified Shape-based distance.
-#' @return A List of containing distance matrices
+#' @return A list containing distance matrices
 #' @examples
 #' # Toy data
 #' n_cell_x <- 13
