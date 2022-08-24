@@ -95,8 +95,14 @@ setMethod("worm_clustering",
         U <- svd(S_)$u[, seq(object@k)]
         # Update
         iter <- iter + 1
-        G <- ttm(ttm(ttm(A, t(U), m=1), t(U), m=2), t(W), m=3)
-        A_bar <- ttm(ttm(ttm(G, U, m=1), U, m=2), W, m=3)
+        A |>
+            ttm(t(U), m=1) |>
+                ttm(t(U), m=2) |>
+                    ttm(t(W), m=3) -> G
+        G |>
+            ttm(U, m=1) |>
+                ttm(U, m=2) |>
+                    ttm(W, m=3) -> A_bar
         RecError[iter] <- .recErrorTensor(A, A_bar)
         RelChange[iter] <- abs(RecError[iter-1] - RecError[iter]) /
             RecError[iter]
@@ -108,7 +114,9 @@ setMethod("worm_clustering",
     # Clustering
     dist_mat <- dist(U)
     # Clustering
-    out <- cutree(hclust(dist_mat, method="ward.D2"), object@k)
+    dist_mat |>
+        hclust(method="ward.D2") |>
+            cutree(object@k) -> out
     # Output
     list(clustering=out, factor=U, weight=as.vector(W))
 }
@@ -146,7 +154,9 @@ setMethod("worm_clustering",
     }
     # Clustering
     dist_mat <- dist(X)
-    out <- cutree(hclust(dist_mat, method="ward.D2"), object@k)
+    dist_mat |>
+        hclust(method="ward.D2") |>
+            cutree(object@k) -> out
     # Output
     names(out) <- dimnames(object@membership_tensor@data)[[1]]
     list(clustering=out, factor=X)
@@ -193,7 +203,9 @@ setMethod("worm_clustering",
     cons_mat <- modeSum(object@membership_tensor, m=3, drop=TRUE)@data
     cons_mat <- cons_mat / length(object@dist_matrices)
     dist_mat <- as.dist(1 - cons_mat)
-    out <- cutree(hclust(dist_mat, method="ward.D2"), object@k)
+    dist_mat |>
+        hclust(method="ward.D2") |>
+            cutree(object@k) -> out
     # Output
     names(out) <- dimnames(object@membership_tensor@data)[[1]]
     list(consensus=cons_mat, clustering=out)
