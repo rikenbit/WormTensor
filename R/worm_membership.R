@@ -22,12 +22,18 @@ setMethod("worm_membership",
     # Argment Check
     .check_worm_membership(object, k, I, M)
     # Clustering result for each animal
-    Cs <- lapply(object@dist_matrices, function(d, k){
-        cutree(hclust(d, method="ward.D2"), k)
-    }, k=k)
+    Cs <- lapply(object@dist_matrices,
+        function(d, k){
+            d |>
+                hclust(method="ward.D2") |>
+                    cutree(k)
+        },
+        k=k)
     # Cs → Indicator matrices
     Hs <- lapply(Cs, function(x){
-        out <- matrix(0, nrow=length(x), ncol=length(unique(x)))
+        out <- matrix(0,
+                      nrow=length(x),
+                      ncol=length(unique(x)))
         for(i in seq_along(x)){
             out[i,x[i]] <- 1
         }
@@ -64,7 +70,7 @@ setMethod("worm_membership",
 }
 
 .search_position <- function(union_cellnames, mth_cellnames){
-    unlist(lapply(mth_cellnames, function(x){
-        which(x == union_cellnames)
-    }))
+    mth_cellnames |>
+        lapply(function(x){which(x == union_cellnames)}) |>
+            unlist()
 }

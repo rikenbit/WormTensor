@@ -58,7 +58,11 @@ worm_distance <- function(data, distance=c("mSBD", "SBD", "Euclid")){
     if(length(data) <= 2){
         stop("The number of matrices are too small!")
     }
-    stopifnot(all(unlist(lapply(data, is.numeric))))
+    data |>
+        lapply(is.numeric) |>
+            unlist() |>
+                all() |>
+                    stopifnot()
 }
 
 .SBDMatrix <- function(X){
