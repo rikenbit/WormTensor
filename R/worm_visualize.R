@@ -310,9 +310,11 @@ setMethod("worm_visualize", "WormTensor",
         # sort by weight
         df_sort_weight <- df_each[order(df_each$weight, decreasing=T), ]
         # cowplot
-        g1 <- ggplot(df_sort_weight, aes(x = animals,
-                                         y= ARI ,
-                                         group=1)) +
+        g1 <- ggplot(df_sort_weight,
+                     aes(x = animals,
+                         y= ARI ,
+                         group=1)
+                     ) +
             geom_line(color = "red", size= 2) +
             scale_x_discrete(limits=df_sort_weight$animals) +
             theme_half_open() +
