@@ -7,7 +7,7 @@ Authors@R: c(person("Kentaro", "Yamamoto", role = c("aut", "cre"),
                       person("Koki", "Tsuyuzaki", role = "aut"),
                       person("Itoshi", "Nikaido", role = "aut"))
 Maintainer: Kentaro Yamamoto <yamaken37.the.answer@gmail.com>
-Description: Description: A toolkit to detect clusters from distance matrices. 
+Description: A toolkit to detect clusters from distance matrices. 
     The distance matrices are assumed to be calculated between the cells of 
     multiple animals (Caenorhabditis elegans) from input time-series matrices. 
     Some functions for generating distance matrices, performing clustering, 

@@ -49,7 +49,6 @@ worm_download <- function(distance=c("mSBD", "Euclid"),
                   tempfile2)
     labels <- read.csv(tempfile2)
     # Output
-    # list(Ds=Ds[idx], labels=labels)
     Ds_f <- lapply(Ds, .filter_cellnames)
     list(Ds=Ds_f[idx], labels=labels)
 }

@@ -36,7 +36,7 @@ expect_true(
     all(is.numeric(unlist(object_external@eval$external$label2))))
 expect_true(
     all(is.numeric(unlist(object_external@eval$external$label3))))
-# data for each cell
+# Data for each cell
 expect_true(length(object_external@eval$cellwise) == 3)
-# data for weight_ARI_no.png
+# Data for weight_ARI_no.png
 expect_true(length(object_external@eval$each_animal) == 4)

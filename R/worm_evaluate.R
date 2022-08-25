@@ -1,5 +1,5 @@
 #' Evaluates clustering result
-#' An evaluation result is generated from a WormTensor object
+#' An evaluation result is generated from a WormTensor object.
 #' @param object WormTensor object with a result of worm_clustering
 #' @param labels Labels for external evaluation
 #' @return WormTensor object with an evaluation result added
@@ -58,7 +58,7 @@ setMethod("worm_evaluate", "WormTensor",
                         cutree(k)
             },
             k=object@k)
-        # dist for silhouette, connectivity
+        # Dist object for silhouette, connectivity
         if(object@clustering_algorithm %in% c("MCMI", "OINDSCAL")){
             cls_dist <- dist(data)
         }
@@ -66,7 +66,7 @@ setMethod("worm_evaluate", "WormTensor",
             cls_dist <- as.dist(data)
         }
 
-        # cellwise
+        # Cellwise
         if(!is.null(labels)){
             consistency=.consistency(object, labels, Cs)
         }else{
@@ -79,7 +79,7 @@ setMethod("worm_evaluate", "WormTensor",
                          silhouette=silhouette)
 
         # Internal Validity Indices
-        # silhouette_Ave. one animal
+        # Silhouette_Ave. one animal
         sil_ave=mean(cellwise$silhouette[,3])
         psf=.pseudoF(data, cluster)
         cty=.connectivity(cls_dist, cluster)
@@ -95,11 +95,11 @@ setMethod("worm_evaluate", "WormTensor",
                     ARI=ARI(cluster, l))
             })
             names(ext_out) <- names(labels)
-            # add labels
+            # Add labels
             ext_labels <- labels
         }else{
             ext_out <- list(Fmeasure=NULL, Entropy=NULL, Purity=NULL)
-            # add labels
+            # Add labels
             ext_labels=NULL
         }
 
@@ -138,11 +138,11 @@ setMethod("worm_evaluate", "WormTensor",
             ) |>
                 unlist() |>
                     as.numeric() -> ARI_value
-            # annotated count
+            # Annotated count
             lapply(object@dist_matrices, function(x){attr(x,"Size")}) |>
                 unlist() |>
                     as.numeric() -> annotated_count
-            # each_animal object
+            # Each animal object
             df_eval_animal <- data.frame(animals = names(object@dist_matrices),
                                          weight = object@weight,
                                          ARI = ARI_value,
@@ -184,7 +184,6 @@ setMethod("worm_evaluate", "WormTensor",
 }
 
 .connectivity <- function(cls_dist, cluster){
-    # Connectivity
     connectivity(cls_dist, cluster)
 }
 ######### External Validity Indices (w Labels) #########
@@ -252,20 +251,20 @@ setMethod("worm_evaluate", "WormTensor",
 
             other_member <- .other_member(H_label)
 
-            # カウント
+            # count
             count1 <- rep(0, length=length(label))
             for(i in seq_len(nrow(H_label))){
                 idx1 <- which(H_label[i, ] == 1)
                 idx2 <- which(H_cluster[i, ] == 1)
                 count1[i] <- sum(H_label[,idx1] * H_cluster[,idx2]) - 1
             }
-            # 正規化
+            # normalization
             count1 <- count1 / other_member
-            # 0/0のNaN対策
+            # 0/0 NaN support
             count1 <- ifelse(is.nan(count1), 0, count1)
-            # 1個体分 count1
+            # for one animal, count1
             df_count <- cbind(df_cls_label, Count=count1)
-            # object@union_cellnamesにcount1を埋める
+            # assign count1 to object@union_cellnames
             df_union <- data.frame(CellType = object@union_cellnames,
                                    stringsAsFactors = FALSE)
             df_count_union <- merge(df_union,
@@ -282,7 +281,7 @@ setMethod("worm_evaluate", "WormTensor",
     })
     return(consistency_l)
 }
-# 一回、接続行列に変換
+# Convert to conjunctive matrix
 .H <- function(vec){
     uniq_vec <- unique(vec)
     out <- matrix(0, nrow=length(vec), ncol=length(uniq_vec))
@@ -294,7 +293,7 @@ setMethod("worm_evaluate", "WormTensor",
     }
     out
 }
-# 自分以外のメンバー数 正規化用
+# Number of members other than oneself, for normalization
 .other_member <- function(H_label){
     out <- rep(0, length=nrow(H_label))
     for(i in seq_len(nrow(H_label))){

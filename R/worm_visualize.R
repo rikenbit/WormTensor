@@ -1,29 +1,29 @@
 #' Plots evaluation result
-#' A visualization result is generated from a WormTensor object
+#' A visualization result is generated from a WormTensor object.
 #' @param object WormTensor object with a result of worm_evaluate
 #' @param out.dir Output directory (default: tempdir())
 #' @param algorithm Dimensional reduction methods
 #' @param seed Arguments passed to set.seed (default: 1234)
 #' @param tsne.dims Output dimensionality (default: 2)
-#' @param tsne.perplexity Perplexity paramete (default: 15)
+#' @param tsne.perplexity Perplexity parameter (default: 15)
 #' @param tsne.verbose logical; Whether progress updates should be printed
 #' (default: TRUE)
 #' @param tsne.max_iter Number of iterations (default: 1000)
-#' @param umap.n_neighbors The size of local neighborhood (default: 15)
+#' @param umap.n_neighbors The size of the local neighborhood (default: 15)
 #' @param umap.n_components The dimension of the space to embed into
 #' (default: 2)
-#' @param silhouette.summary logical; If true a summary of
-#' cluster silhouettes are printed.
+#' @param silhouette.summary logical; If true a summary of cluster silhouettes
+#' are printed.
 #' @return Silhouette plots. ARI with a merge result and each animal(with MCMI).
-#'  Dimensional reduction Plots colored by cluster, no. of identified cells,
-#'  consistency(with labels), Class_label(with labels).
+#' Dimensional reduction plots colored by cluster, no. of identified cells,
+#' consistency(with labels), Class_label(with labels).
 #' @references The .dist_nn function is quoted from dist_nn
 #' (not exported function) in package uwot(\url{https://github.com/jlmelville/uwot/tree/f467185c8cbcd158feb60dde608c9da153ed10d7}).
 #' @examples
 #' # Temporary directory to save figures
 #' out.dir <- tempdir()
 #'
-#' # labels
+#' # Labels
 #' worm_download("mSBD", qc="PASS")$Ds |>
 #'     as_worm_tensor() |>
 #'         worm_membership(k=6) |>
@@ -135,7 +135,7 @@ setMethod("worm_visualize", "WormTensor",
     if(!dir.exists(paste0(out.dir, "/figures"))){
         dir.create(paste0(out.dir, "/figures"))
     }
-    #### 1. 細胞ごとのシルエット図（例: 論文 Figure 2）####
+    #### 1. Silhouette plot of each cell ####
     sil <- object@eval$cellwise$silhouette
     gg_sil <- fviz_silhouette(sil, print.summary = silhouette.summary) +
         labs(y = "Silhouette width",
@@ -144,7 +144,7 @@ setMethod("worm_visualize", "WormTensor",
              color ="Cluster",
              fill = "Cluster") +
         theme(text = element_text(size = 90))
-    # save (silhouette plot of each cell)
+    # Save (silhouette plot of each cell)
     ggsave(filename = paste0(out.dir, "/figures/Silhouette.png"),
            plot = gg_sil,
            dpi = 100,
@@ -152,7 +152,7 @@ setMethod("worm_visualize", "WormTensor",
            height = 20.0,
            limitsize = FALSE)
 
-    ##### 2. 次元圧縮図に色を反映させたもの（例: 論文 Figure 3,4）####
+    ##### 2. Dimensional reduction plots colored by any labels.####
     ##### Cluster#####
     df_cls <- data.frame(cord_1 = twoD[,1],
                          cord_2 = twoD[,2],
@@ -217,7 +217,7 @@ setMethod("worm_visualize", "WormTensor",
            width = 25.0,
            height = 20.0,
            limitsize = FALSE)
-    ##### consistency  (plot each label)#####
+    ##### Consistency  (plot each label)#####
     if(!is.null(object@eval$cellwise$consistency)){
         con_list <- object@eval$cellwise$consistency
         for (x in seq_along(con_list)) {
@@ -262,12 +262,12 @@ setMethod("worm_visualize", "WormTensor",
     }
     ##### Class (plot each label)#####
     if(!is.null(object@eval$external_label)){
-        # plot
+        # Plot each label
         label_list <- object@eval$external_label
         for (x in seq_along(label_list)) {
             label_name <- names(label_list[x])
             label_value <- label_list[[x]]
-            # convert NA(char) to NA
+            # Convert NA(char) to NA
             label_value[which(label_value=="NA")] <- NA
             df_label <- data.frame(cord_1 = twoD[,1],
                                    cord_2 = twoD[,2],
@@ -304,12 +304,12 @@ setMethod("worm_visualize", "WormTensor",
                    )
         }
     }
-    ##### 3. 重み/ARIと同定細胞数の関係（例: 論文 Figure 6a）#####
+    ##### 3. Weight/ARI vs. number of cells identified#####
     if(!is.null(object@eval$each_animal)){
         df_each <- object@eval$each_animal
-        # sort by weight
+        # Sort by weight
         df_sort_weight <- df_each[order(df_each$weight, decreasing=T), ]
-        # cowplot
+        # Cowplot
         g1 <- ggplot(df_sort_weight,
                      aes(x = animals,
                          y= ARI ,

@@ -65,8 +65,8 @@ object <- worm_clustering(object)
 object <- worm_evaluate(object)
 ```
 
-# worm_visualize
-`worm_visualize` is a function to visualize a `worm_evaluate` result.
+# worm_visualize`
+`worm_visualize` is a function to visualize `worm_clustering` and `worm_evaluate` results.
 ```{r worm_visualize, echo=TRUE}
 object <- worm_visualize(object)
 ```
