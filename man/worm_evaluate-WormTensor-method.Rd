@@ -3,7 +3,7 @@
 \name{worm_evaluate,WormTensor-method}
 \alias{worm_evaluate,WormTensor-method}
 \title{Evaluates clustering result
-An evaluation result is generated from a WormTensor object}
+An evaluation result is generated from a WormTensor object.}
 \usage{
 \S4method{worm_evaluate}{WormTensor}(object, labels = NULL)
 }
@@ -17,7 +17,7 @@ WormTensor object with an evaluation result added
 }
 \description{
 Evaluates clustering result
-An evaluation result is generated from a WormTensor object
+An evaluation result is generated from a WormTensor object.
 }
 \examples{
 # Pipe Operation

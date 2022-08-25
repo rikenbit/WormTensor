@@ -42,9 +42,9 @@ worm_visualize(
 
 \item{algorithm}{Dimensional reduction methods}
 
-\item{num.iter}{Upper limit of iterations (Default value is 30)}
+\item{num.iter}{The upper limit of iterations (Default value is 30)}
 
-\item{thr}{Lower limit of relative change in estimates
+\item{thr}{The lower limit of relative change in estimates
 (Default value is 1E-10)}
 
 \item{verbose}{Control message}
@@ -62,7 +62,7 @@ worm_visualize(
 \item{tsne.verbose}{logical; Whether progress updates should be printed
 (default: TRUE)}
 
-\item{tsne.max_iter}{Number of iterations (default: 1000)}
+\item{tsne.max_iter}{The number of iterations (default: 1000)}
 
 \item{umap.n_neighbors}{The size of local neighborhood (default: 15)}
 

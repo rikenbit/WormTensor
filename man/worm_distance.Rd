@@ -15,7 +15,7 @@ worm_distance(data, distance = c("mSBD", "SBD", "Euclid"))
 modified Shape-based distance.}
 }
 \value{
-A List of containing distance matrices
+A list containing distance matrices
 }
 \description{
 Generates distance matrices

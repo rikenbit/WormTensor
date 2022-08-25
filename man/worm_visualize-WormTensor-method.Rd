@@ -3,7 +3,7 @@
 \name{worm_visualize,WormTensor-method}
 \alias{worm_visualize,WormTensor-method}
 \title{Plots evaluation result
-A visualization result is generated from a WormTensor object}
+A visualization result is generated from a WormTensor object.}
 \usage{
 \S4method{worm_visualize}{WormTensor}(
   object,
@@ -30,35 +30,35 @@ A visualization result is generated from a WormTensor object}
 
 \item{tsne.dims}{Output dimensionality (default: 2)}
 
-\item{tsne.perplexity}{Perplexity paramete (default: 15)}
+\item{tsne.perplexity}{Perplexity parameter (default: 15)}
 
 \item{tsne.verbose}{logical; Whether progress updates should be printed
 (default: TRUE)}
 
 \item{tsne.max_iter}{Number of iterations (default: 1000)}
 
-\item{umap.n_neighbors}{The size of local neighborhood (default: 15)}
+\item{umap.n_neighbors}{The size of the local neighborhood (default: 15)}
 
 \item{umap.n_components}{The dimension of the space to embed into
 (default: 2)}
 
-\item{silhouette.summary}{logical; If true a summary of
-cluster silhouettes are printed.}
+\item{silhouette.summary}{logical; If true a summary of cluster silhouettes
+are printed.}
 }
 \value{
 Silhouette plots. ARI with a merge result and each animal(with MCMI).
- Dimensional reduction Plots colored by cluster, no. of identified cells,
- consistency(with labels), Class_label(with labels).
+Dimensional reduction plots colored by cluster, no. of identified cells,
+consistency(with labels), Class_label(with labels).
 }
 \description{
 Plots evaluation result
-A visualization result is generated from a WormTensor object
+A visualization result is generated from a WormTensor object.
 }
 \examples{
 # Temporary directory to save figures
 out.dir <- tempdir()
 
-# labels
+# Labels
 worm_download("mSBD", qc="PASS")$Ds |>
     as_worm_tensor() |>
         worm_membership(k=6) |>

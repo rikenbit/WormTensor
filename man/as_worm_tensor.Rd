@@ -8,8 +8,7 @@ A WormTensor object is generated from distance matrices.}
 as_worm_tensor(Ds)
 }
 \arguments{
-\item{Ds}{A List of containing distance matrices. The list also includes
-metadata for each animals.}
+\item{Ds}{A list containing distance matrices}
 }
 \value{
 An object containing distance matrices and metadata
