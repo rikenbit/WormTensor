@@ -23,8 +23,8 @@ An evaluation result is generated from a WormTensor object.
 # Pipe Operation
 worm_download("mSBD", qc = "PASS")$Ds |>
     as_worm_tensor() |>
-    worm_membership(k = 6) |>
-    worm_clustering() -> object
+        worm_membership(k = 6) |>
+            worm_clustering() -> object
 # Internal evaluation
 worm_evaluate(object) -> object_internal
 
