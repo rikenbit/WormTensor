@@ -85,7 +85,7 @@ Ms_mSBD |>
     unlist() |>
     all() |>
     expect_true()
-##### Euclid / SBD / mSBD ######
+##### Euclid, SBD, mSBD ######
 expect_false(identical(Ds_Euclid, Ds_SBD))
 expect_false(identical(Ds_Euclid, Ds_mSBD))
 expect_false(identical(Ms_Euclid, Ms_SBD))

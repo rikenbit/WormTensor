@@ -23,16 +23,16 @@ expect_equal(
 )
 
 ######## OINDSCAL #######
-worm_clustering(object, algorithm = "OINDSCAL", verbose = TRUE) -> object_oindscal
+worm_clustering(object, algorithm = "OINDSCAL", verbose = TRUE) -> object_oind
 
-expect_equal(object_oindscal@clustering_algorithm, "OINDSCAL")
+expect_equal(object_oind@clustering_algorithm, "OINDSCAL")
 expect_equal(
-    length(object_oindscal@clustering),
-    object_oindscal@n_union_cells
+    length(object_oind@clustering),
+    object_oind@n_union_cells
 )
 expect_equal(
-    dim(object_oindscal@factor),
-    c(object_oindscal@n_union_cells, object_oindscal@k)
+    dim(object_oind@factor),
+    c(object_oind@n_union_cells, object_oind@k)
 )
 
 ######## CSPA #######

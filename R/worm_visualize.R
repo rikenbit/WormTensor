@@ -366,7 +366,7 @@ setMethod(
         if (!is.null(object@eval$each_animal)) {
             df_each <- object@eval$each_animal
             # Sort by weight
-            df_sort_weight <- df_each[order(df_each$weight, decreasing = T), ]
+            df_sort_weight <- df_each[order(df_each$weight, decreasing = TRUE), ]
             # Cowplot
             g1 <- ggplot(
                 df_sort_weight,
