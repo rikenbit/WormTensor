@@ -1,4 +1,4 @@
-.dist2mat <- function(x){
+.dist2mat <- function(x) {
     as.matrix(x)
 }
 
@@ -25,13 +25,13 @@ Ms_mSBD <- lapply(Ds_mSBD, .dist2mat)
 expect_true(all(unlist(lapply(Ms_mSBD, isSymmetric))))
 
 ############ WARN ############
-Ds_Euclid_warn <- worm_download("Euclid", qc="WARN")$Ds
+Ds_Euclid_warn <- worm_download("Euclid", qc = "WARN")$Ds
 expect_true(object.size(Ds_Euclid_warn) != 0)
 expect_equal(length(Ds_Euclid_warn), 27)
 expect_true(all(lapply(Ds_Euclid_warn, is) == "dist"))
 
 ############ FAIL ############
-Ds_Euclid_fail <- worm_download("Euclid", qc="FAIL")$Ds
+Ds_Euclid_fail <- worm_download("Euclid", qc = "FAIL")$Ds
 expect_true(object.size(Ds_Euclid_fail) != 0)
 expect_equal(length(Ds_Euclid_fail), 28)
 expect_true(all(lapply(Ds_Euclid_fail, is) == "dist"))

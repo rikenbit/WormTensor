@@ -4,7 +4,7 @@ out.dir <- tempdir()
 ######### without Labels #########
 worm_download()$Ds |>
     as_worm_tensor() |>
-        worm_membership(k=6) |>
+        worm_membership(k = 6) |>
             worm_clustering() |>
                 worm_evaluate() |>
                     worm_visualize(out.dir) -> object
@@ -23,13 +23,14 @@ expect_true(file.exists(filename4))
 
 ######### with Labels #########
 labels <- list(
-    label1 = sample(3, length(object@clustering), replace=TRUE),
-    label2 = sample(4, length(object@clustering), replace=TRUE),
-    label3 = sample(5, length(object@clustering), replace=TRUE))
+    label1 = sample(3, length(object@clustering), replace = TRUE),
+    label2 = sample(4, length(object@clustering), replace = TRUE),
+    label3 = sample(5, length(object@clustering), replace = TRUE)
+)
 
 worm_download()$Ds |>
     as_worm_tensor() |>
-        worm_membership(k=6) |>
+        worm_membership(k = 6) |>
             worm_clustering() |>
                 worm_evaluate(labels) |>
                     worm_visualize(out.dir) -> object_labels
@@ -67,10 +68,10 @@ expect_true(file.exists(filename10))
 ######### CSPA (without Labels) #########
 worm_download()$Ds |>
     as_worm_tensor() |>
-    worm_membership(k=6) |>
-    worm_clustering("CSPA") |>
-    worm_evaluate() |>
-    worm_visualize(out.dir) -> object
+        worm_membership(k = 6) |>
+            worm_clustering("CSPA") |>
+                worm_evaluate() |>
+                    worm_visualize(out.dir) -> object
 
 filename1 <- paste0(out.dir, "/figures/Silhouette.png")
 expect_true(file.exists(filename1))
@@ -84,10 +85,10 @@ expect_true(file.exists(filename3))
 ######### OINDSCAL (without Labels) #########
 worm_download()$Ds |>
     as_worm_tensor() |>
-    worm_membership(k=6) |>
-    worm_clustering("OINDSCAL") |>
-    worm_evaluate() |>
-    worm_visualize(out.dir) -> object
+        worm_membership(k = 6) |>
+            worm_clustering("OINDSCAL") |>
+                worm_evaluate() |>
+                    worm_visualize(out.dir) -> object
 
 filename1 <- paste0(out.dir, "/figures/Silhouette.png")
 expect_true(file.exists(filename1))

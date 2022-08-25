@@ -59,33 +59,36 @@ A visualization result is generated from a WormTensor object.
 out.dir <- tempdir()
 
 # Labels
-worm_download("mSBD", qc="PASS")$Ds |>
+worm_download("mSBD", qc = "PASS")$Ds |>
     as_worm_tensor() |>
-        worm_membership(k=6) |>
-            worm_clustering() -> object
-Ds_mSBD <- worm_download("mSBD", qc="PASS")
+    worm_membership(k = 6) |>
+    worm_clustering() -> object
+Ds_mSBD <- worm_download("mSBD", qc = "PASS")
 labels <- list(
-    label1 = replace(Ds_mSBD$labels$Class,
-    which(is.na(Ds_mSBD$labels$Class)),
-    "NA"),
-    label2 = sample(4, length(object@clustering), replace=TRUE),
-    label3 = sample(5, length(object@clustering), replace=TRUE))
+    label1 = replace(
+        Ds_mSBD$labels$Class,
+        which(is.na(Ds_mSBD$labels$Class)),
+        "NA"
+    ),
+    label2 = sample(4, length(object@clustering), replace = TRUE),
+    label3 = sample(5, length(object@clustering), replace = TRUE)
+)
 
 # Pipe Operation (without Labels)
-worm_download("mSBD", qc="PASS")$Ds |>
-   as_worm_tensor() |>
-   worm_membership(k=6) |>
-   worm_clustering() |>
-   worm_evaluate() |>
-   worm_visualize(out.dir) -> object_no_labels
+worm_download("mSBD", qc = "PASS")$Ds |>
+    as_worm_tensor() |>
+    worm_membership(k = 6) |>
+    worm_clustering() |>
+    worm_evaluate() |>
+    worm_visualize(out.dir) -> object_no_labels
 
 # Pipe Operation (with Labels)
-worm_download("mSBD", qc="PASS")$Ds |>
-   as_worm_tensor() |>
-   worm_membership(k=6) |>
-   worm_clustering() |>
-   worm_evaluate(labels) |>
-   worm_visualize(out.dir) -> object_labels
+worm_download("mSBD", qc = "PASS")$Ds |>
+    as_worm_tensor() |>
+    worm_membership(k = 6) |>
+    worm_clustering() |>
+    worm_evaluate(labels) |>
+    worm_visualize(out.dir) -> object_labels
 }
 \references{
 The .dist_nn function is quoted from dist_nn

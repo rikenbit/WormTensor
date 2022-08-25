@@ -1,4 +1,4 @@
-.dist2mat <- function(x){
+.dist2mat <- function(x) {
     as.matrix(x)
 }
 
@@ -10,33 +10,38 @@ n_cells <- 30
 n_time_frames <- 100
 
 # 13 cells, 100 time frames
-animal_x <- matrix(runif(n_cell_x*n_time_frames),
-    nrow=n_cell_x,
-    ncol=n_time_frames)
+animal_x <- matrix(runif(n_cell_x * n_time_frames),
+    nrow = n_cell_x,
+    ncol = n_time_frames
+)
 rownames(animal_x) <- sample(seq(n_cells), n_cell_x)
 colnames(animal_x) <- seq(n_time_frames)
 
 # 24 cells, 100 time frames
-animal_y <- matrix(runif(n_cell_y*n_time_frames),
-    nrow=n_cell_y,
-    ncol=n_time_frames)
+animal_y <- matrix(runif(n_cell_y * n_time_frames),
+    nrow = n_cell_y,
+    ncol = n_time_frames
+)
 rownames(animal_y) <- sample(seq(n_cells), n_cell_y)
 colnames(animal_y) <- seq(n_time_frames)
 
 # 29 cells, 100 time frames
-animal_z <- matrix(runif(n_cell_z*n_time_frames),
-    nrow=n_cell_z,
-    ncol=n_time_frames)
+animal_z <- matrix(runif(n_cell_z * n_time_frames),
+    nrow = n_cell_z,
+    ncol = n_time_frames
+)
 rownames(animal_z) <- sample(seq(n_cells), n_cell_z)
 colnames(animal_z) <- seq(n_time_frames)
 
 # Positive Control of Difference between SBD and mSBD
-animal_z[2, ] <- - animal_x[1, ]
+animal_z[2, ] <- -animal_x[1, ]
 
 # Input list for worm_distnce
-X <- list(animal_x=animal_x,
-    animal_y=animal_y,
-    animal_z=animal_z)
+X <- list(
+    animal_x = animal_x,
+    animal_y = animal_y,
+    animal_z = animal_z
+)
 
 ############ Euclid ############
 ## dist object
@@ -49,9 +54,9 @@ expect_true(all(lapply(Ds_Euclid, is) == "dist"))
 Ms_Euclid <- lapply(Ds_Euclid, .dist2mat)
 Ms_Euclid |>
     lapply(isSymmetric) |>
-        unlist() |>
-            all() |>
-                expect_true()
+    unlist() |>
+    all() |>
+    expect_true()
 ############# SBD #############
 ## dist object
 Ds_SBD <- worm_distance(X, "SBD")
@@ -63,9 +68,9 @@ expect_true(all(lapply(Ds_SBD, is) == "dist"))
 Ms_SBD <- lapply(Ds_SBD, .dist2mat)
 Ms_SBD |>
     lapply(isSymmetric) |>
-        unlist() |>
-            all() |>
-                expect_true()
+    unlist() |>
+    all() |>
+    expect_true()
 ############# mSBD #############
 ## dist object
 Ds_mSBD <- worm_distance(X, "mSBD")
@@ -77,9 +82,9 @@ expect_true(all(lapply(Ds_mSBD, is) == "dist"))
 Ms_mSBD <- lapply(Ds_mSBD, .dist2mat)
 Ms_mSBD |>
     lapply(isSymmetric) |>
-        unlist() |>
-            all() |>
-                expect_true()
+    unlist() |>
+    all() |>
+    expect_true()
 ##### Euclid / SBD / mSBD ######
 expect_false(identical(Ds_Euclid, Ds_SBD))
 expect_false(identical(Ds_Euclid, Ds_mSBD))

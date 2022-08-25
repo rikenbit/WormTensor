@@ -3,12 +3,12 @@
 #' @param Ds A list containing distance matrices
 #' @return An object containing distance matrices and metadata
 #' @examples
-#' worm_download("mSBD", qc="PASS")$Ds |> as_worm_tensor() -> object
+#' worm_download("mSBD", qc = "PASS")$Ds |> as_worm_tensor() -> object
 #' @import rTensor
 #' @importFrom methods new
 #' @importFrom methods is
 #' @export
-as_worm_tensor <- function(Ds){
+as_worm_tensor <- function(Ds) {
     .check_as_worm_tensor(Ds)
     object <- new("WormTensor")
     object@dist_matrices <- Ds
@@ -18,19 +18,20 @@ as_worm_tensor <- function(Ds){
     object
 }
 
-.union_cellnames <- function(Ds){
+.union_cellnames <- function(Ds) {
     Ds |>
-        lapply(function(x){attr(x, "Labels")}) |>
-            unlist() |>
-                unique() |>
-                    sort() -> res
+        lapply(function(x) {
+            attr(x, "Labels")
+        }) |>
+        unlist() |>
+        unique() |>
+        sort() -> res
     res
 }
 
-.check_as_worm_tensor <- function(Ds){
+.check_as_worm_tensor <- function(Ds) {
     Ds |>
-        lapply(function(x){
+        lapply(function(x) {
             stopifnot(is(x) == "dist")
-            }
-        )
+        })
 }

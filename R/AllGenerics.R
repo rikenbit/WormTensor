@@ -15,9 +15,12 @@ NULL
 #' @param k Assumed number of clusters
 #' @export
 # worm_membership
-setGeneric("worm_membership",
-    function(object, k){
-    standardGeneric("worm_membership")})
+setGeneric(
+    "worm_membership",
+    function(object, k) {
+        standardGeneric("worm_membership")
+    }
+)
 
 #' @rdname AllGenerics_component
 #' @param object WormTensor object
@@ -28,23 +31,28 @@ setGeneric("worm_membership",
 #' @param algorithm Clustering methods
 #' @export
 # worm_clustering
-setGeneric("worm_clustering",
+setGeneric(
+    "worm_clustering",
     function(object,
-             algorithm=c("MCMI", "OINDSCAL", "CSPA"),
-             num.iter=30,
-             thr=1E-10,
-             verbose=FALSE
-             ){
-    standardGeneric("worm_clustering")})
+             algorithm = c("MCMI", "OINDSCAL", "CSPA"),
+             num.iter = 30,
+             thr = 1E-10,
+             verbose = FALSE) {
+        standardGeneric("worm_clustering")
+    }
+)
 
 #' @rdname AllGenerics_component
 #' @param object WormTensor object
 #' @param labels Labels for external evaluation
 #' @export
 # worm_evaluate
-setGeneric("worm_evaluate",
-    function(object, labels=NULL){
-    standardGeneric("worm_evaluate")})
+setGeneric(
+    "worm_evaluate",
+    function(object, labels = NULL) {
+        standardGeneric("worm_evaluate")
+    }
+)
 
 #' @rdname AllGenerics_component
 #' @param object WormTensor object
@@ -63,16 +71,19 @@ setGeneric("worm_evaluate",
 #' cluster silhouettes are printed.
 #' @export
 # worm_visualize
-setGeneric("worm_visualize",
+setGeneric(
+    "worm_visualize",
     function(object,
-             out.dir=tempdir(),
-             algorithm=c("tSNE", "UMAP"),
-             seed=1234,
-             tsne.dims=2,
-             tsne.perplexity=15,
-             tsne.verbose=FALSE,
-             tsne.max_iter=1000,
-             umap.n_neighbors=15,
-             umap.n_components=2,
-             silhouette.summary=FALSE){
-    standardGeneric("worm_visualize")})
+             out.dir = tempdir(),
+             algorithm = c("tSNE", "UMAP"),
+             seed = 1234,
+             tsne.dims = 2,
+             tsne.perplexity = 15,
+             tsne.verbose = FALSE,
+             tsne.max_iter = 1000,
+             umap.n_neighbors = 15,
+             umap.n_components = 2,
+             silhouette.summary = FALSE) {
+        standardGeneric("worm_visualize")
+    }
+)

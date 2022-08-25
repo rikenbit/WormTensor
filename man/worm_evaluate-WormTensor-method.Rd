@@ -21,27 +21,31 @@ An evaluation result is generated from a WormTensor object.
 }
 \examples{
 # Pipe Operation
-worm_download("mSBD", qc="PASS")$Ds |>
+worm_download("mSBD", qc = "PASS")$Ds |>
     as_worm_tensor() |>
-        worm_membership(k=6) |>
-            worm_clustering() -> object
+    worm_membership(k = 6) |>
+    worm_clustering() -> object
 # Internal evaluation
 worm_evaluate(object) -> object_internal
 
 # External evaluation by sample labels
 labels <- list(
-    label1 = sample(3, length(object@clustering), replace=TRUE),
-    label2 = sample(4, length(object@clustering), replace=TRUE),
-    label3 = sample(5, length(object@clustering), replace=TRUE))
+    label1 = sample(3, length(object@clustering), replace = TRUE),
+    label2 = sample(4, length(object@clustering), replace = TRUE),
+    label3 = sample(5, length(object@clustering), replace = TRUE)
+)
 worm_evaluate(object, labels) -> object_external
 
 # External evaluation by worm_download labels
-Ds_mSBD <- worm_download("mSBD", qc="PASS")
+Ds_mSBD <- worm_download("mSBD", qc = "PASS")
 labels <- list(
-    label1 = replace(Ds_mSBD$labels$Class,
-    which(is.na(Ds_mSBD$labels$Class)),
-    "NA"),
-    label2 = sample(4, length(object@clustering), replace=TRUE),
-    label3 = sample(5, length(object@clustering), replace=TRUE))
+    label1 = replace(
+        Ds_mSBD$labels$Class,
+        which(is.na(Ds_mSBD$labels$Class)),
+        "NA"
+    ),
+    label2 = sample(4, length(object@clustering), replace = TRUE),
+    label3 = sample(5, length(object@clustering), replace = TRUE)
+)
 worm_evaluate(object, labels) -> object_external_Class
 }
