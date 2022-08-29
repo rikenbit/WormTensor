@@ -13,7 +13,8 @@ Description: A toolkit to detect clusters from distance matrices.
     Some functions for generating distance matrices, performing clustering, 
     evaluating the clustering, and visualizing the results of clustering and 
     evaluation are available. We're also providing the download function to 
-    retrieve the pre-calculated distance matrices from figshare.
+    retrieve the pre-calculated distance matrices from 
+    figshare (https://figshare.com).
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
