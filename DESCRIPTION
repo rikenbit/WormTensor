@@ -3,7 +3,7 @@ Type: Package
 Title: A Clustering Method for Time-Series Whole-Brain Activity Data of C. elegans
 Version: 0.1.0
 Authors@R: c(person("Kentaro", "Yamamoto", role = c("aut", "cre"),
-                      email = "samadakenji@gmail.com"),
+                      email = "yamaken37.the.answer@gmail.com"),
                       person("Koki", "Tsuyuzaki", role = "aut"),
                       person("Itoshi", "Nikaido", role = "aut"))
 Maintainer: Kentaro Yamamoto <yamaken37.the.answer@gmail.com>
