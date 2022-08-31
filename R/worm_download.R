@@ -20,8 +20,8 @@ worm_download <- function(distance = c("mSBD", "Euclid"),
     qc <- match.arg(qc)
     # Distance matrices
     Ds <- NULL
-    tmpdir <- tempdir()
-    tempfile1 <- paste0(tmpdir, "/Ds.RData")
+    temp_dl_path <- tempdir()
+    tempfile1 <- file.path(temp_dl_path, "Ds.RData")
     if (distance == "mSBD") {
         download.file(
             "https://figshare.com/ndownloader/files/35963780",
@@ -46,7 +46,7 @@ worm_download <- function(distance = c("mSBD", "Euclid"),
         idx <- seq(28)
     }
     # Labels
-    tempfile2 <- paste0(tmpdir, "/labels.csv")
+    tempfile2 <- file.path(temp_dl_path, "labels.csv")
     download.file(
         "https://figshare.com/ndownloader/files/36186483",
         tempfile2

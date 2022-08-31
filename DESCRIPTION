@@ -1,6 +1,6 @@
 Package: WormTensor
 Type: Package
-Title: A Clustering Method for Time-Series Whole-Brain Activity Data of C. elegans
+Title: A Clustering Method for Time-Series Whole-Brain Activity Data of 'C. elegans'
 Version: 0.1.0
 Authors@R: c(person("Kentaro", "Yamamoto", role = c("aut", "cre"),
                       email = "yamaken37.the.answer@gmail.com"),
@@ -9,12 +9,12 @@ Authors@R: c(person("Kentaro", "Yamamoto", role = c("aut", "cre"),
 Maintainer: Kentaro Yamamoto <yamaken37.the.answer@gmail.com>
 Description: A toolkit to detect clusters from distance matrices. 
     The distance matrices are assumed to be calculated between the cells of 
-    multiple animals (Caenorhabditis elegans) from input time-series matrices. 
+    multiple animals ('Caenorhabditis elegans') from input time-series matrices. 
     Some functions for generating distance matrices, performing clustering, 
     evaluating the clustering, and visualizing the results of clustering and 
     evaluation are available. We're also providing the download function to 
-    retrieve the precalculated distance matrices from 
-    figshare (https://figshare.com).
+    retrieve the calculated distance matrices from 
+    'figshare' <https://figshare.com>.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

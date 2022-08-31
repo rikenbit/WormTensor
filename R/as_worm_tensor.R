@@ -3,6 +3,12 @@
 #' @param Ds A list containing distance matrices
 #' @return An object containing distance matrices and metadata
 #' @examples
+#' #### test####
+#' temp_dl_path <- tempdir()
+#' tempfile1 <- file.path(temp_dl_path, "Ds.RData")
+#' cat(tempfile1)
+#' print(tempfile1)
+#' #### test####
 #' worm_download("mSBD", qc = "PASS")$Ds |> as_worm_tensor() -> object
 #' @import rTensor
 #' @importFrom methods new
