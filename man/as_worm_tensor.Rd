@@ -18,5 +18,11 @@ Generates WormTensor object
 A WormTensor object is generated from distance matrices.
 }
 \examples{
+#### test####
+temp_dl_path <- gsub("\\\\\\\\", "/", tempdir())
+tempfile1 <- file.path(temp_dl_path, "Ds.RData")
+cat(tempfile1)
+print(tempfile1)
+#### test####
 worm_download("mSBD", qc = "PASS")$Ds |> as_worm_tensor() -> object
 }

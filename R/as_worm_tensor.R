@@ -4,7 +4,7 @@
 #' @return An object containing distance matrices and metadata
 #' @examples
 #' #### test####
-#' temp_dl_path <- tempdir()
+#' temp_dl_path <- gsub("\\\\", "/", tempdir())
 #' tempfile1 <- file.path(temp_dl_path, "Ds.RData")
 #' cat(tempfile1)
 #' print(tempfile1)
