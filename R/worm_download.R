@@ -20,7 +20,7 @@ worm_download <- function(distance = c("mSBD", "Euclid"),
     qc <- match.arg(qc)
     # Distance matrices
     Ds <- NULL
-    temp_dl_path <- gsub("\\\\", "/", tempdir())
+    temp_dl_path <- tempdir()
     tempfile1 <- file.path(temp_dl_path, "Ds.RData")
     if (distance == "mSBD") {
         download.file(

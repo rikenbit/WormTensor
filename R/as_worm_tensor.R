@@ -4,10 +4,25 @@
 #' @return An object containing distance matrices and metadata
 #' @examples
 #' #### test####
-#' temp_dl_path <- gsub("\\\\", "/", tempdir())
+#' temp_dl_path <- tempdir()
+#' print(temp_dl_path)
+#' dir.exists(temp_dl_path)
+#' list.files(temp_dl_path, full.names=T)
+#' list.files(temp_dl_path, full.names=T, all.files=T)
+#'
 #' tempfile1 <- file.path(temp_dl_path, "Ds.RData")
-#' cat(tempfile1)
 #' print(tempfile1)
+#' file.exists(tempfile1)
+#'
+#' tempfile1_back <- paste0(temp_dl_path, "\\Ds.RData")
+#' print(tempfile1_back)
+#' cat(tempfile1_back)
+#' file.exists(tempfile1_back)
+#'
+#' #' tempfile1_back2 <- paste0(temp_dl_path, "\\\\Ds.RData")
+#' print(tempfile1_back2)
+#' cat(tempfile1_back2)
+#' file.exists(tempfile1_back2)
 #' #### test####
 #' worm_download("mSBD", qc = "PASS")$Ds |> as_worm_tensor() -> object
 #' @import rTensor
