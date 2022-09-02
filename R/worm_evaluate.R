@@ -4,34 +4,36 @@
 #' @param labels Labels for external evaluation
 #' @return WormTensor object with an evaluation result added
 #' @examples
-#' # Pipe Operation
-#' worm_download("mSBD", qc = "PASS")$Ds |>
-#'     as_worm_tensor() |>
-#'         worm_membership(k = 6) |>
-#'             worm_clustering() -> object
-#' # Internal evaluation
-#' worm_evaluate(object) -> object_internal
+#' if(interactive()) {
+#'     # Pipe Operation
+#'     worm_download("mSBD", qc = "PASS")$Ds |>
+#'         as_worm_tensor() |>
+#'             worm_membership(k = 6) |>
+#'                 worm_clustering() -> object
+#'      # Internal evaluation
+#'      worm_evaluate(object) -> object_internal
 #'
-#' # External evaluation by sample labels
-#' labels <- list(
-#'     label1 = sample(3, length(object@clustering), replace = TRUE),
-#'     label2 = sample(4, length(object@clustering), replace = TRUE),
-#'     label3 = sample(5, length(object@clustering), replace = TRUE)
-#' )
-#' worm_evaluate(object, labels) -> object_external
+#'      # External evaluation by sample labels
+#'      labels <- list(
+#'          label1 = sample(3, length(object@clustering), replace = TRUE),
+#'          label2 = sample(4, length(object@clustering), replace = TRUE),
+#'          label3 = sample(5, length(object@clustering), replace = TRUE)
+#'      )
+#'      worm_evaluate(object, labels) -> object_external
 #'
-#' # External evaluation by worm_download labels
-#' Ds_mSBD <- worm_download("mSBD", qc = "PASS")
-#' labels <- list(
-#'     label1 = replace(
-#'         Ds_mSBD$labels$Class,
-#'         which(is.na(Ds_mSBD$labels$Class)),
-#'         "NA"
-#'     ),
-#'     label2 = sample(4, length(object@clustering), replace = TRUE),
-#'     label3 = sample(5, length(object@clustering), replace = TRUE)
-#' )
-#' worm_evaluate(object, labels) -> object_external_Class
+#'      # External evaluation by worm_download labels
+#'      Ds_mSBD <- worm_download("mSBD", qc = "PASS")
+#'      labels <- list(
+#'          label1 = replace(
+#'              Ds_mSBD$labels$Class,
+#'              which(is.na(Ds_mSBD$labels$Class)),
+#'              "NA"
+#'          ),
+#'          label2 = sample(4, length(object@clustering), replace = TRUE),
+#'          label3 = sample(5, length(object@clustering), replace = TRUE)
+#'      )
+#'      worm_evaluate(object, labels) -> object_external_Class
+#' }
 #' @importFrom clusterSim index.G1
 #' @importFrom clValid connectivity
 #' @importFrom aricode ARI

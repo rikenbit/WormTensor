@@ -20,12 +20,14 @@ A WormTensor object is generated from distance matrices.
 \examples{
 #### test####
 temp_dl_path <- tempdir()
+tempfile1 <- file.path(temp_dl_path, "Ds.RData")
+download.file("https://figshare.com/ndownloader/files/35963780", tempfile1)
+
 print(temp_dl_path)
 dir.exists(temp_dl_path)
-list.files(temp_dl_path, full.names=T)
-list.files(temp_dl_path, full.names=T, all.files=T)
+list.files(temp_dl_path, full.names=TRUE)
+list.files(temp_dl_path, full.names=TRUE, all.files=TRUE)
 
-tempfile1 <- file.path(temp_dl_path, "Ds.RData")
 print(tempfile1)
 file.exists(tempfile1)
 
@@ -34,7 +36,7 @@ print(tempfile1_back)
 cat(tempfile1_back)
 file.exists(tempfile1_back)
 
-#' tempfile1_back2 <- paste0(temp_dl_path, "\\\\Ds.RData")
+tempfile1_back2 <- paste0(temp_dl_path, "\\\\\\\\Ds.RData")
 print(tempfile1_back2)
 cat(tempfile1_back2)
 file.exists(tempfile1_back2)

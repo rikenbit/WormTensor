@@ -20,40 +20,42 @@
 #' @references The .dist_nn function is quoted from dist_nn
 #' (not exported function) in package uwot(\url{https://github.com/jlmelville/uwot/tree/f467185c8cbcd158feb60dde608c9da153ed10d7}).
 #' @examples
-#' # Temporary directory to save figures
-#' out.dir <- tempdir()
+#' if(interactive()) {
+#'     # Temporary directory to save figures
+#'     out.dir <- tempdir()
 #'
-#' # Labels
-#' worm_download("mSBD", qc = "PASS")$Ds |>
-#'     as_worm_tensor() |>
-#'         worm_membership(k = 6) |>
-#'             worm_clustering() -> object
-#' Ds_mSBD <- worm_download("mSBD", qc = "PASS")
-#' labels <- list(
-#'     label1 = replace(
-#'         Ds_mSBD$labels$Class,
-#'         which(is.na(Ds_mSBD$labels$Class)),
-#'         "NA"
-#'     ),
-#'     label2 = sample(4, length(object@clustering), replace = TRUE),
-#'     label3 = sample(5, length(object@clustering), replace = TRUE)
-#' )
+#'     # Labels
+#'     worm_download("mSBD", qc = "PASS")$Ds |>
+#'         as_worm_tensor() |>
+#'             worm_membership(k = 6) |>
+#'                 worm_clustering() -> object
+#'     Ds_mSBD <- worm_download("mSBD", qc = "PASS")
+#'     labels <- list(
+#'         label1 = replace(
+#'             Ds_mSBD$labels$Class,
+#'             which(is.na(Ds_mSBD$labels$Class)),
+#'             "NA"
+#'         ),
+#'         label2 = sample(4, length(object@clustering), replace = TRUE),
+#'         label3 = sample(5, length(object@clustering), replace = TRUE)
+#'     )
 #'
-#' # Pipe Operation (without Labels)
-#' worm_download("mSBD", qc = "PASS")$Ds |>
-#'     as_worm_tensor() |>
-#'         worm_membership(k = 6) |>
-#'             worm_clustering() |>
-#'                 worm_evaluate() |>
-#'                     worm_visualize(out.dir) -> object_no_labels
+#'     # Pipe Operation (without Labels)
+#'     worm_download("mSBD", qc = "PASS")$Ds |>
+#'         as_worm_tensor() |>
+#'             worm_membership(k = 6) |>
+#'                 worm_clustering() |>
+#'                     worm_evaluate() |>
+#'                         worm_visualize(out.dir) -> object_no_labels
 #'
-#' # Pipe Operation (with Labels)
-#' worm_download("mSBD", qc = "PASS")$Ds |>
-#'     as_worm_tensor() |>
-#'         worm_membership(k = 6) |>
-#'             worm_clustering() |>
-#'                 worm_evaluate(labels) |>
-#'                     worm_visualize(out.dir) -> object_labels
+#'     # Pipe Operation (with Labels)
+#'     worm_download("mSBD", qc = "PASS")$Ds |>
+#'         as_worm_tensor() |>
+#'             worm_membership(k = 6) |>
+#'                 worm_clustering() |>
+#'                     worm_evaluate(labels) |>
+#'                         worm_visualize(out.dir) -> object_labels
+#' }
 #' @import ggplot2
 #' @importFrom Rtsne Rtsne
 #' @import uwot
