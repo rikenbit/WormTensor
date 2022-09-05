@@ -20,26 +20,19 @@ A WormTensor object is generated from distance matrices.
 \examples{
 #### test####
 temp_dl_path <- tempdir()
+print(temp_dl_path)
+dir.exists(temp_dl_path)
+
 tempfile1 <- file.path(temp_dl_path, "Ds.RData")
 download.file("https://figshare.com/ndownloader/files/35963780", tempfile1)
 
-print(temp_dl_path)
-dir.exists(temp_dl_path)
-list.files(temp_dl_path, full.names=TRUE)
-list.files(temp_dl_path, full.names=TRUE, all.files=TRUE)
-
 print(tempfile1)
 file.exists(tempfile1)
-
-tempfile1_back <- paste0(temp_dl_path, "\\\\Ds.RData")
-print(tempfile1_back)
-cat(tempfile1_back)
-file.exists(tempfile1_back)
-
-tempfile1_back2 <- paste0(temp_dl_path, "\\\\\\\\Ds.RData")
-print(tempfile1_back2)
-cat(tempfile1_back2)
-file.exists(tempfile1_back2)
+file.access(tempfile1,mode=0)
+file.access(tempfile1,mode=1)
+file.access(tempfile1,mode=2)
+file.access(tempfile1,mode=4)
+load(tempfile1)
 #### test####
 worm_download("mSBD", qc = "PASS")$Ds |> as_worm_tensor() -> object
 }
