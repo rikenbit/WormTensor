@@ -24,7 +24,7 @@ print(temp_dl_path)
 dir.exists(temp_dl_path)
 
 tempfile1 <- file.path(temp_dl_path, "Ds.RData")
-download.file("https://figshare.com/ndownloader/files/35963780", tempfile1)
+download.file("https://figshare.com/ndownloader/files/35963780", tempfile1, mode="wb")
 
 print(tempfile1)
 file.exists(tempfile1)
@@ -32,6 +32,10 @@ file.access(tempfile1,mode=0)
 file.access(tempfile1,mode=1)
 file.access(tempfile1,mode=2)
 file.access(tempfile1,mode=4)
+
+options()$download.file.method
+file.info(tempfile1)
+
 load(tempfile1)
 #### test####
 worm_download("mSBD", qc = "PASS")$Ds |> as_worm_tensor() -> object
