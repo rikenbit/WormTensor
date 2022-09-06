@@ -18,27 +18,5 @@ Generates WormTensor object
 A WormTensor object is generated from distance matrices.
 }
 \examples{
-#### test####
-temp_dl_path <- tempdir()
-print(temp_dl_path)
-dir.exists(temp_dl_path)
-
-tempfile1 <- file.path(temp_dl_path, "Ds.RData")
-download.file("https://figshare.com/ndownloader/files/35963780", tempfile1, mode="wb")
-
-print(tempfile1)
-options()$download.file.method
-file.info(tempfile1)
-
-if(.Platform$OS.type == "windows") {
-    # download for windows
-    print(.Platform$OS.type)
-    download.file("https://figshare.com/ndownloader/files/35963780", tempfile1, mode="wb")
-} else {
-    # download for unix
-    print(.Platform$OS.type)
-    download.file("https://figshare.com/ndownloader/files/35963780", tempfile1)
-}
-#### test####
 worm_download("mSBD", qc = "PASS")$Ds |> as_worm_tensor() -> object
 }
