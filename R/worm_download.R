@@ -23,15 +23,27 @@ worm_download <- function(distance = c("mSBD", "Euclid"),
     temp_dl_path <- tempdir()
     tempfile1 <- file.path(temp_dl_path, "Ds.RData")
     if (distance == "mSBD") {
-        download.file(
-            "https://figshare.com/ndownloader/files/35963780",
-            tempfile1
-        )
+        if(.Platform$OS.type == "windows") {
+            # download for windows
+            download.file("https://figshare.com/ndownloader/files/35963780",
+                          tempfile1,
+                          mode="wb")
+        } else {
+            # download for unix
+            download.file("https://figshare.com/ndownloader/files/35963780",
+                          tempfile1)
+        }
     } else if (distance == "Euclid") {
-        download.file(
-            "https://figshare.com/ndownloader/files/35963777",
-            tempfile1
-        )
+        if(.Platform$OS.type == "windows") {
+            # download for windows
+            download.file("https://figshare.com/ndownloader/files/35963777",
+                          tempfile1,
+                          mode="wb")
+        } else {
+            # download for unix
+            download.file("https://figshare.com/ndownloader/files/35963777",
+                          tempfile1)
+        }
     } else {
         stop("Please specify distance as 'mSBD' or 'Euclid'!")
     }
@@ -47,10 +59,16 @@ worm_download <- function(distance = c("mSBD", "Euclid"),
     }
     # Labels
     tempfile2 <- file.path(temp_dl_path, "labels.csv")
-    download.file(
-        "https://figshare.com/ndownloader/files/36186483",
-        tempfile2
-    )
+    if(.Platform$OS.type == "windows") {
+        # download for windows
+        download.file("https://figshare.com/ndownloader/files/36186483",
+                      tempfile2,
+                      mode="wb")
+    } else {
+        # download for unix
+        download.file("https://figshare.com/ndownloader/files/36186483",
+                      tempfile2)
+    }
     labels <- read.csv(tempfile2)
     # Output
     Ds_f <- lapply(Ds, .filter_cellnames)

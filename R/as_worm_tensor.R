@@ -12,16 +12,18 @@
 #' download.file("https://figshare.com/ndownloader/files/35963780", tempfile1, mode="wb")
 #'
 #' print(tempfile1)
-#' file.exists(tempfile1)
-#' file.access(tempfile1,mode=0)
-#' file.access(tempfile1,mode=1)
-#' file.access(tempfile1,mode=2)
-#' file.access(tempfile1,mode=4)
-#'
 #' options()$download.file.method
 #' file.info(tempfile1)
 #'
-#' load(tempfile1)
+#' if(.Platform$OS.type == "windows") {
+#'     # download for windows
+#'     print(.Platform$OS.type)
+#'     download.file("https://figshare.com/ndownloader/files/35963780", tempfile1, mode="wb")
+#' } else {
+#'     # download for unix
+#'     print(.Platform$OS.type)
+#'     download.file("https://figshare.com/ndownloader/files/35963780", tempfile1)
+#' }
 #' #### test####
 #' worm_download("mSBD", qc = "PASS")$Ds |> as_worm_tensor() -> object
 #' @import rTensor
