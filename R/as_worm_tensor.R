@@ -3,7 +3,9 @@
 #' @param Ds A list containing distance matrices
 #' @return An object containing distance matrices and metadata
 #' @examples
-#' worm_download("mSBD", qc = "PASS")$Ds |> as_worm_tensor() -> object
+#' if(interactive()) {
+#'     worm_download("mSBD", qc = "PASS")$Ds |> as_worm_tensor() -> object
+#' }
 #' @import rTensor
 #' @importFrom methods new
 #' @importFrom methods is

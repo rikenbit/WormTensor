@@ -20,9 +20,11 @@ Generates membership tensor
 A membership tensor is generated from distance matrices.
 }
 \examples{
-# Pipe Operation
-worm_download("mSBD", qc = "PASS")$Ds |>
-    as_worm_tensor() -> object
-# k=6
-worm_membership(object, k = 6) -> object_k6
+if(interactive()) {
+    # Pipe Operation
+    worm_download("mSBD", qc = "PASS")$Ds |>
+        as_worm_tensor() -> object
+    # k=6
+    worm_membership(object, k = 6) -> object_k6
+}
 }

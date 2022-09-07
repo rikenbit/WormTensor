@@ -7,8 +7,10 @@
 #' @return A List of containing distance matrices. The list also includes
 #' metadata for each animals.
 #' @examples
-#' Ds_Euclid <- worm_download("Euclid", qc = "WARN")
-#' Ds_mSBD <- worm_download("mSBD", qc = "PASS")
+#' if(interactive()) {
+#'     Ds_Euclid <- worm_download("Euclid", qc = "WARN")
+#'     Ds_mSBD <- worm_download("mSBD", qc = "PASS")
+#' }
 #' @importFrom usedist dist_subset
 #' @importFrom utils download.file
 #' @importFrom utils read.csv

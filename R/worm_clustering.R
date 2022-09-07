@@ -8,13 +8,15 @@
 #' @param algorithm Clustering methods
 #' @return WormTensor object with a clustering result added
 #' @examples
-#' # Pipe Operation
-#' worm_download("Euclid", qc = "WARN")$Ds |>
-#'     as_worm_tensor() |>
-#'         worm_membership(k = 6) -> object
-#' worm_clustering(object, verbose = TRUE) -> ob_mcmi
-#' worm_clustering(object, algorithm = "OINDSCAL", verbose = TRUE) -> ob_oind
-#' worm_clustering(object, algorithm = "CSPA", verbose = TRUE) -> ob_cspa
+#' if(interactive()) {
+#'     # Pipe Operation
+#'     worm_download("Euclid", qc = "WARN")$Ds |>
+#'         as_worm_tensor() |>
+#'             worm_membership(k = 6) -> object
+#'     worm_clustering(object, verbose = TRUE) -> ob_mcmi
+#'     worm_clustering(object, algorithm = "OINDSCAL", verbose = TRUE) -> ob_oind
+#'     worm_clustering(object, algorithm = "CSPA", verbose = TRUE) -> ob_cspa
+#' }
 #' @import rTensor
 #' @importFrom stats as.dist
 #' @importFrom stats cutree
