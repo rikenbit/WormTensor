@@ -20,7 +20,7 @@
 #' @references The .dist_nn function is quoted from dist_nn
 #' (not exported function) in package uwot(\url{https://github.com/jlmelville/uwot/tree/f467185c8cbcd158feb60dde608c9da153ed10d7}).
 #' @examples
-#' if(interactive()) {
+#' \donttest{
 #'     # Temporary directory to save figures
 #'     out.dir <- tempdir()
 #'

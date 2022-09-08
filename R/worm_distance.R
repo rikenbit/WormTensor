@@ -6,7 +6,7 @@
 #' modified Shape-based distance.
 #' @return A list containing distance matrices
 #' @examples
-#' if(interactive()) {
+#' \donttest{
 #'     # Toy data
 #'     n_cell_x <- 13
 #'     n_cell_y <- 24

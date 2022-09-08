@@ -4,7 +4,7 @@
 #' @param labels Labels for external evaluation
 #' @return WormTensor object with an evaluation result added
 #' @examples
-#' if(interactive()) {
+#' \donttest{
 #'     # Pipe Operation
 #'     worm_download("mSBD", qc = "PASS")$Ds |>
 #'         as_worm_tensor() |>

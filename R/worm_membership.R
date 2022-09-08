@@ -4,7 +4,7 @@
 #' @param k Assumed number of clusters
 #' @return WormTensor object with membership tensor added
 #' @examples
-#' if(interactive()) {
+#' \donttest{
 #'     # Pipe Operation
 #'     worm_download("mSBD", qc = "PASS")$Ds |>
 #'         as_worm_tensor() -> object

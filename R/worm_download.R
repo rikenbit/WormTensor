@@ -7,7 +7,7 @@
 #' @return A List of containing distance matrices. The list also includes
 #' metadata for each animals.
 #' @examples
-#' if(interactive()) {
+#' \donttest{
 #'     Ds_Euclid <- worm_download("Euclid", qc = "WARN")
 #'     Ds_mSBD <- worm_download("mSBD", qc = "PASS")
 #' }

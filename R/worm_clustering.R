@@ -8,7 +8,7 @@
 #' @param algorithm Clustering methods
 #' @return WormTensor object with a clustering result added
 #' @examples
-#' if(interactive()) {
+#' \donttest{
 #'     # Pipe Operation
 #'     worm_download("Euclid", qc = "WARN")$Ds |>
 #'         as_worm_tensor() |>
