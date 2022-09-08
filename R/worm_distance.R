@@ -6,44 +6,42 @@
 #' modified Shape-based distance.
 #' @return A list containing distance matrices
 #' @examples
-#' \donttest{
-#'     # Toy data
-#'     n_cell_x <- 13
-#'     n_cell_y <- 24
-#'     n_cell_z <- 29
-#'     n_cells <- 30
-#'     n_time_frames <- 100
+#' # Toy data
+#' n_cell_x <- 13
+#' n_cell_y <- 24
+#' n_cell_z <- 29
+#' n_cells <- 30
+#' n_time_frames <- 100
 #'
-#'     # 13 cells, 100 time frames
-#'     animal_x <- matrix(runif(n_cell_x * n_time_frames),
-#'         nrow = n_cell_x, ncol = n_time_frames
-#'     )
-#'     rownames(animal_x) <- sample(seq(n_cells), n_cell_x)
-#'     colnames(animal_x) <- seq(n_time_frames)
+#' # 13 cells, 100 time frames
+#' animal_x <- matrix(runif(n_cell_x * n_time_frames),
+#'     nrow = n_cell_x, ncol = n_time_frames
+#' )
+#' rownames(animal_x) <- sample(seq(n_cells), n_cell_x)
+#' colnames(animal_x) <- seq(n_time_frames)
 #'
-#'     # 24 cells, 100 time frames
-#'     animal_y <- matrix(runif(n_cell_y * n_time_frames),
-#'         nrow = n_cell_y, ncol = n_time_frames
-#'     )
-#'     rownames(animal_y) <- sample(seq(n_cells), n_cell_y)
-#'     colnames(animal_y) <- seq(n_time_frames)
+#' # 24 cells, 100 time frames
+#' animal_y <- matrix(runif(n_cell_y * n_time_frames),
+#'     nrow = n_cell_y, ncol = n_time_frames
+#' )
+#' rownames(animal_y) <- sample(seq(n_cells), n_cell_y)
+#' colnames(animal_y) <- seq(n_time_frames)
 #'
-#'     # 29 cells, 100 time frames
-#'     animal_z <- matrix(runif(n_cell_z * n_time_frames),
-#'         nrow = n_cell_z, ncol = n_time_frames
-#'     )
-#'     rownames(animal_z) <- sample(seq(n_cells), n_cell_z)
-#'     colnames(animal_z) <- seq(n_time_frames)
+#' # 29 cells, 100 time frames
+#' animal_z <- matrix(runif(n_cell_z * n_time_frames),
+#'     nrow = n_cell_z, ncol = n_time_frames
+#' )
+#' rownames(animal_z) <- sample(seq(n_cells), n_cell_z)
+#' colnames(animal_z) <- seq(n_time_frames)
 #'
-#'     # Positive Control of Difference between SBD and mSBD
-#'     animal_z[2, ] <- -animal_x[1, ]
-#'     X <- list(
-#'         animal_x = animal_x,
-#'         animal_y = animal_y,
-#'         animal_z = animal_z
-#'     )
-#'     Ds_mSBD <- worm_distance(X, "mSBD")
-#' }
+#' # Positive Control of Difference between SBD and mSBD
+#' animal_z[2, ] <- -animal_x[1, ]
+#' X <- list(
+#'     animal_x = animal_x,
+#'     animal_y = animal_y,
+#'     animal_z = animal_z
+#' )
+#' Ds_mSBD <- worm_distance(X, "mSBD")
 #' @importFrom dtwclust SBD
 #' @importFrom dtwclust NCCc
 #' @importFrom dtwclust zscore
