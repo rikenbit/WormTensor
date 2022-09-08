@@ -23,7 +23,7 @@ Distance matrices are generated between the cells of multiple animals
 (Caenorhabditis elegans)  from time-series matrices.
 }
 \examples{
-if(interactive()) {
+\donttest{
     # Toy data
     n_cell_x <- 13
     n_cell_y <- 24

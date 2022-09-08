@@ -33,7 +33,7 @@ Generates clustering result
 A clustering result is generated from a membership tensor.
 }
 \examples{
-if(interactive()) {
+\donttest{
     # Pipe Operation
     worm_download("Euclid", qc = "WARN")$Ds |>
         as_worm_tensor() |>

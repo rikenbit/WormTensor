@@ -55,7 +55,7 @@ Plots evaluation result
 A visualization result is generated from a WormTensor object.
 }
 \examples{
-if(interactive()) {
+\donttest{
     # Temporary directory to save figures
     out.dir <- tempdir()
 

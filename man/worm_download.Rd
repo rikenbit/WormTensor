@@ -23,7 +23,7 @@ Downloads distance matrices
 28 animals' data including 24 normal and 4 noisy are retrieved from figshare.
 }
 \examples{
-if(interactive()) {
+\donttest{
     Ds_Euclid <- worm_download("Euclid", qc = "WARN")
     Ds_mSBD <- worm_download("mSBD", qc = "PASS")
 }

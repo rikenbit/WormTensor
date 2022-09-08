@@ -20,7 +20,7 @@ Generates membership tensor
 A membership tensor is generated from distance matrices.
 }
 \examples{
-if(interactive()) {
+\donttest{
     # Pipe Operation
     worm_download("mSBD", qc = "PASS")$Ds |>
         as_worm_tensor() -> object

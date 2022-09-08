@@ -20,7 +20,7 @@ Evaluates clustering result
 An evaluation result is generated from a WormTensor object.
 }
 \examples{
-if(interactive()) {
+\donttest{
     # Pipe Operation
     worm_download("mSBD", qc = "PASS")$Ds |>
         as_worm_tensor() |>
