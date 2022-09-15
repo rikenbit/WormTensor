@@ -16,7 +16,7 @@ docker pull ghcr.io/yamaken37/wormtensor
 or 
 ~~~~
 # Docker Hub
-docker pull yamaken37/wormtensor:sha-def2ba9
+docker pull yamaken37/wormtensor
 ~~~~
 
 Installation
