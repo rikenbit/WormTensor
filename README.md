@@ -3,6 +3,11 @@
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/WormTensor)](https://cran.r-project.org/package=WormTensor)
 [![Downloads](https://cranlogs.r-pkg.org/badges/WormTensor)](https://CRAN.R-project.org/package=WormTensor)
 [![Total Downloads](https://cranlogs.r-pkg.org/badges/grand-total/WormTensor?color=orange)](https://CRAN.R-project.org/package=WormTensor)
+
+[![WormTensor status badge](https://rikenbit.r-universe.dev/badges/WormTensor)](https://rikenbit.r-universe.dev)
+[![:name status badge](https://rikenbit.r-universe.dev/badges/:name)](https://rikenbit.r-universe.dev)
+[![:registry status badge](https://rikenbit.r-universe.dev/badges/:registry)](https://rikenbit.r-universe.dev)
+[![:total status badge](https://rikenbit.r-universe.dev/badges/:total)](https://rikenbit.r-universe.dev)
 --------------------------------------------------
 # WormTensor
 R package for a Clustering Method for Time-Series Whole-Brain Activity Data of C. elegans
@@ -11,12 +16,12 @@ Installation of Dependent Packages
 ======
 ~~~~
 # GHCR
-docker pull ghcr.io/yamaken37/wormtensor:def2ba9
+docker pull ghcr.io/yamaken37/wormtensor
 ~~~~
 or 
 ~~~~
 # Docker Hub
-docker pull yamaken37/wormtensor:sha-def2ba9
+docker pull yamaken37/wormtensor
 ~~~~
 
 Installation
