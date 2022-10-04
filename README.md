@@ -8,6 +8,7 @@
 [![:name status badge](https://rikenbit.r-universe.dev/badges/:name)](https://rikenbit.r-universe.dev)
 [![:registry status badge](https://rikenbit.r-universe.dev/badges/:registry)](https://rikenbit.r-universe.dev)
 [![:total status badge](https://rikenbit.r-universe.dev/badges/:total)](https://rikenbit.r-universe.dev)
+![GitHub Actions](https://github.com/rikenbit/WormTensor/actions/workflows/build_push_test.yml/badge.svg)
 --------------------------------------------------
 # WormTensor
 R package for a Clustering Method for Time-Series Whole-Brain Activity Data of C. elegans
