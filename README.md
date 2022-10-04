@@ -16,7 +16,7 @@ Installation of Dependent Packages
 ======
 ~~~~
 # GHCR
-docker pull ghcr.io/yamaken37/wormtensor
+docker pull ghcr.io/rikenbit/wormtensor
 ~~~~
 or 
 ~~~~
