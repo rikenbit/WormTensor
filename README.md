@@ -13,6 +13,8 @@
 # WormTensor
 R package for a Clustering Method for Time-Series Whole-Brain Activity Data of C. elegans
 
+<img src="WormTensor.png" width="120px" height="139px" />
+
 Installation of Dependent Packages
 ======
 ~~~~
