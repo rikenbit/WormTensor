@@ -34,6 +34,6 @@ as_worm_tensor <- function(Ds) {
 .check_as_worm_tensor <- function(Ds) {
     Ds |>
         lapply(function(x) {
-            stopifnot(is(x) == "dist")
+            stopifnot(is(x, "dist"))
         })
 }
