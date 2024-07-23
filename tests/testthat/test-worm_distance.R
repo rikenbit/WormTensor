@@ -48,7 +48,7 @@ X <- list(
 Ds_Euclid <- worm_distance(X, "Euclid")
 expect_true(object.size(Ds_Euclid) != 0)
 expect_equal(length(Ds_Euclid), 3)
-expect_true(all(lapply(Ds_Euclid, is) == "dist"))
+expect_true(all(lapply(Ds_Euclid, function(x) {is(x, "dist")})))
 
 ## matrix object
 Ms_Euclid <- lapply(Ds_Euclid, .dist2mat)
@@ -62,8 +62,7 @@ Ms_Euclid |>
 Ds_SBD <- worm_distance(X, "SBD")
 expect_true(object.size(Ds_SBD) != 0)
 expect_equal(length(Ds_SBD), 3)
-expect_true(all(lapply(Ds_SBD, is) == "dist"))
-
+expect_true(all(lapply(Ds_SBD, function(x) {is(x, "dist")})))
 ## matrix object
 Ms_SBD <- lapply(Ds_SBD, .dist2mat)
 Ms_SBD |>
@@ -76,8 +75,7 @@ Ms_SBD |>
 Ds_mSBD <- worm_distance(X, "mSBD")
 expect_true(object.size(Ds_mSBD) != 0)
 expect_equal(length(Ds_mSBD), 3)
-expect_true(all(lapply(Ds_mSBD, is) == "dist"))
-
+expect_true(all(lapply(Ds_mSBD, function(x) {is(x, "dist")})))
 ## matrix object
 Ms_mSBD <- lapply(Ds_mSBD, .dist2mat)
 Ms_mSBD |>
