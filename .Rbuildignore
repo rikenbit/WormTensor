@@ -6,3 +6,4 @@
 ^CRAN-SUBMISSION$
 ^.*\.Rhistory$
 ^Dockerfile$
+^\.github$
