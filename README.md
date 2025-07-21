@@ -1,6 +1,6 @@
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7064124.svg)](https://doi.org/10.5281/zenodo.7064124)
 
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/WormTensor)](https://cran.r-project.org/package=WormTensor)
+[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/WormTensor)](https://cran.r-project.org/package=WormTensor)
 [![Downloads](https://cranlogs.r-pkg.org/badges/WormTensor)](https://CRAN.R-project.org/package=WormTensor)
 [![Total Downloads](https://cranlogs.r-pkg.org/badges/grand-total/WormTensor?color=orange)](https://CRAN.R-project.org/package=WormTensor)
 
