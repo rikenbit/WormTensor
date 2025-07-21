@@ -14,67 +14,71 @@
 #' @importFrom usedist dist_subset
 #' @importFrom utils download.file
 #' @importFrom utils read.csv
+#' @importFrom curl has_internet
 #' @export
 worm_download <- function(distance = c("mSBD", "Euclid"),
-                          qc = c("PASS", "WARN", "FAIL")) {
-    # Argument Check
-    distance <- match.arg(distance)
-    qc <- match.arg(qc)
-    # Distance matrices
-    Ds <- NULL
-    temp_dl_path <- tempdir()
-    tempfile1 <- file.path(temp_dl_path, "Ds.RData")
-    if (distance == "mSBD") {
-        if(.Platform$OS.type == "windows") {
-            # download for windows
-            download.file("https://figshare.com/ndownloader/files/35963780",
-                          tempfile1,
-                          mode="wb")
-        } else {
-            # download for unix
-            download.file("https://figshare.com/ndownloader/files/35963780",
-                          tempfile1)
-        }
-    } else if (distance == "Euclid") {
-        if(.Platform$OS.type == "windows") {
-            # download for windows
-            download.file("https://figshare.com/ndownloader/files/35963777",
-                          tempfile1,
-                          mode="wb")
-        } else {
-            # download for unix
-            download.file("https://figshare.com/ndownloader/files/35963777",
-                          tempfile1)
-        }
-    } else {
-        stop("Please specify distance as 'mSBD' or 'Euclid'!")
-    }
-    load(tempfile1)
-    if (qc == "PASS") {
-        idx <- which(.qcresult %in% c("PASS"))
-    }
-    if (qc == "WARN") {
-        idx <- which(.qcresult %in% c("PASS", "WARN"))
-    }
-    if (qc == "FAIL") {
-        idx <- seq(28)
-    }
-    # Labels
-    tempfile2 <- file.path(temp_dl_path, "labels.csv")
-    if(.Platform$OS.type == "windows") {
-        # download for windows
-        download.file("https://figshare.com/ndownloader/files/36186483",
-                      tempfile2,
-                      mode="wb")
-    } else {
-        # download for unix
-        download.file("https://figshare.com/ndownloader/files/36186483",
-                      tempfile2)
-    }
-    labels <- read.csv(tempfile2)
-    # Output
-    Ds_f <- lapply(Ds, .filter_cellnames)
-    list(Ds = Ds_f[idx], labels = labels)
+                          qc       = c("PASS", "WARN", "FAIL")) {
+  distance <- match.arg(distance)
+  qc       <- match.arg(qc)
+  
+  # CRAN fails internet access -> stop gracefully
+  if (!curl::has_internet()) {
+    stop(
+      "WormTensor requires internet to fetch data, but no connection was detected.\n",
+      "Please check your network or download data manually from:\n",
+      "  https://figshare.com/articles/…/35963780 or 35963777"
+    )
+  }
+  
+  safe_download <- function(url, dest, mode = NULL) {
+    tryCatch({
+      if (is.null(mode)) {
+        utils::download.file(url, dest)
+      } else {
+        utils::download.file(url, dest, mode = mode)
+      }
+    }, error = function(e) {
+      stop(
+        "Failed to download WormTensor data from:\n  ", url, "\n",
+        "Please check your internet connection or visit the URL manually."
+      )
+    })
+  }
+  
+  tmpdir    <- tempdir()
+  file_rda  <- file.path(tmpdir, "Ds.RData")
+  file_lbl  <- file.path(tmpdir, "labels.csv")
+  
+  # Download
+  url_data <- switch(distance,
+                     mSBD   = "https://figshare.com/ndownloader/files/35963780",
+                     Euclid = "https://figshare.com/ndownloader/files/35963777"
+  )
+  safe_download(
+    url_data, file_rda,
+    mode = if (.Platform$OS.type == "windows") "wb" else NULL
+  )
+  load(file_rda)
+  
+  # QC filtering
+  idx <- switch(qc,
+                PASS = which(.qcresult %in% "PASS"),
+                WARN = which(.qcresult %in% c("PASS","WARN")),
+                FAIL = seq_along(.qcresult)
+  )
+  
+  # Labels
+  safe_download(
+    "https://figshare.com/ndownloader/files/36186483",
+    file_lbl,
+    mode = if (.Platform$OS.type == "windows") "wb" else NULL
+  )
+  labels <- utils::read.csv(file_lbl)
+  
+  ## Output
+  Ds_f <- lapply(Ds, .filter_cellnames)
+  list(Ds     = Ds_f[idx],
+       labels = labels)
 }
 
 .qcresult <- rep("", 28)
