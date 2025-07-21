@@ -27,23 +27,23 @@ worm_download <- function(distance = c("mSBD", "Euclid"),
     if (distance == "mSBD") {
         if(.Platform$OS.type == "windows") {
             # download for windows
-            download.file("https://figshare.com/ndownloader/files/35963780",
+            download.file("https://ndownloader.figshare.com/files/35963780",
                           tempfile1,
                           mode="wb")
         } else {
             # download for unix
-            download.file("https://figshare.com/ndownloader/files/35963780",
+            download.file("https://ndownloader.figshare.com/files/35963780",
                           tempfile1)
         }
     } else if (distance == "Euclid") {
         if(.Platform$OS.type == "windows") {
             # download for windows
-            download.file("https://figshare.com/ndownloader/files/35963777",
+            download.file("https://ndownloader.figshare.com/files/35963777",
                           tempfile1,
                           mode="wb")
         } else {
             # download for unix
-            download.file("https://figshare.com/ndownloader/files/35963777",
+            download.file("https://ndownloader.figshare.com/files/35963777",
                           tempfile1)
         }
     } else {
@@ -63,12 +63,12 @@ worm_download <- function(distance = c("mSBD", "Euclid"),
     tempfile2 <- file.path(temp_dl_path, "labels.csv")
     if(.Platform$OS.type == "windows") {
         # download for windows
-        download.file("https://figshare.com/ndownloader/files/36186483",
+        download.file("https://ndownloader.figshare.com/files/36186483",
                       tempfile2,
                       mode="wb")
     } else {
         # download for unix
-        download.file("https://figshare.com/ndownloader/files/36186483",
+        download.file("https://ndownloader.figshare.com/files/36186483",
                       tempfile2)
     }
     labels <- read.csv(tempfile2)

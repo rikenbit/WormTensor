@@ -1,7 +1,7 @@
 Package: WormTensor
 Type: Package
 Title: A Clustering Method for Time-Series Whole-Brain Activity Data of 'C. elegans'
-Version: 0.1.1
+Version: 0.1.2
 Authors@R: c(person("Kentaro", "Yamamoto", role = c("aut", "cre"),
                       email = "yamaken37.the.answer@gmail.com"),
                       person("Koki", "Tsuyuzaki", role = "aut"),

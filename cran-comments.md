@@ -34,6 +34,9 @@ There were no ERRORs, WARNINGs, Notes.
 * This is a update.
 
 ## Resubmission
-* This is a update 0.1.0 -> 0.1.1. 
+* This is a update 0.1.0 -> 0.1.1
 * issue: Suboptimal check of dist
 * https://github.com/rikenbit/WormTensor/issues/24
+
+## Resubmission
+* This is a update 0.1.1 -> 0.1.2
